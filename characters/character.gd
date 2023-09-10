@@ -6,6 +6,7 @@ signal hp_update
 signal rp_update
 signal cast_update
 signal cd_update
+
 ## Maximum Hit Points
 @export var hp_max = 100
 @export var hp_regen_value = 1
@@ -17,26 +18,25 @@ signal cd_update
 @export var speed_initial = 100
 @export var gcd_initial = 1.5
 
-var hp = hp_max
-var rp = rp_max
-var speed = speed_initial	# basically haste from wow
+var hp: int
+var rp: int
+var speed: int # basically haste from wow
 
 var hp_regen: Timer
 var current_spell: Spell
 var spells = {}
 var sounds = {}
 
-func _init():
-	pass
-
 func _ready():
+	hp = hp_max
+	rp = rp_max
+	speed = speed_initial
 	hp_regen = $HitPointRegeneration
 	
 	var children = get_children()
 	for child in children:
 		if child is Spell:
 			spells[child.name] = child
-			print(child)
 		if child is AudioStreamPlayer:
 			sounds[child.name] = child
 	recalculate_cds()
@@ -67,7 +67,7 @@ func update_rp(diff_val):
 
 	rp_update.emit(rp)	
 
-#TODO
+
 func update_cast():
 	if current_spell:
 		var cast_progress = (current_spell.cast.time_left / current_spell.cast.get_wait_time())

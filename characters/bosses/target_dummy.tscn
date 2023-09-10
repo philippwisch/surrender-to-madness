@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgxb0uexgelr2"]
+
+[ext_resource type="PackedScene" uid="uid://dnhs7akej6157" path="res://characters/bosses/boss.tscn" id="1_5d0v5"]
+[ext_resource type="Texture2D" uid="uid://bherw56oi5l2r" path="res://assets/boss_dummy.png" id="2_cdxdr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bnrdp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cdxdr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TargetDummy" instance=ExtResource("1_5d0v5")]
+sprite_frames = SubResource("SpriteFrames_bnrdp")

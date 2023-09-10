@@ -28,8 +28,10 @@ position = Vector2(-1, 140)
 sprite_frames = SubResource("SpriteFrames_es7kq")
 offset = Vector2(1, -140)
 script = ExtResource("2_cb2nx")
+speed_increase = 2
 rp_drain_initial = 6.0
 rp_drain_increase = 0.3
+hp_regen_value = 1
 
 [node name="SpeedIncrease" type="Timer" parent="." index="1"]
 

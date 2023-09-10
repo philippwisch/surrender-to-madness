@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var boss_enc: BossEncounter
+
 var hp
 var rp
 var cast
@@ -10,6 +12,16 @@ var boss_cast
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	boss_enc.player_cast_update.connect(_on_player_cast_update)
+	boss_enc.player_cd_update.connect(_on_player_cd_update)
+	boss_enc.player_hp_update.connect(_on_player_hp_update)
+	boss_enc.player_rp_update.connect(_on_player_rp_update)
+	boss_enc.player_speed_update.connect(_on_player_speed_update)
+	boss_enc.player_death.connect(_on_player_death)
+	
+	boss_enc.boss_hp_update.connect(_on_boss_hp_update)
+	boss_enc.boss_cast_update.connect(_on_boss_cast_update)
+	
 	hp = get_node("Hp")
 	rp = get_node("Rp")
 	cast = get_node("Cast")
@@ -60,12 +72,15 @@ func _on_player_speed_update(new_val):
 	$Speed.set_text("SPEED: +" + str(max(0, new_val - 100)) + "%!")
 
 # TODO
-func _on_player_player_death():
-	$DeathScreen.visible = true
+func _on_player_death():
+	#$DeathScreen.visible = true
+	pass
 
 
 func _on_boss_hp_update(new_val):
-	boss_hp.value = new_val
+	print(boss_hp.value)
+	print(new_val)
+	boss_hp.value = new_val * 100
 
 
 func _on_boss_cast_update(new_val, new_text):

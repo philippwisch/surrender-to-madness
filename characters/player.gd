@@ -1,7 +1,10 @@
 extends Character
 
 signal speed_update
-signal player_death
+signal death
+signal cast_finished
+
+@export var speed_increase = 2
 @export var rp_drain_initial = 6.0			# per second
 @export var rp_drain_increase = 0.3 		# also per second
 
@@ -13,6 +16,7 @@ var game_grid_position = Vector2.ZERO
 
 func _ready():
 	super._ready()
+	Gameplay.game_start.connect(_on_gameplay_game_start)
 
 
 func _process(_delta):
@@ -21,7 +25,7 @@ func _process(_delta):
 	cast()
 	
 	if hp == 0 or rp == 0:
-		player_death.emit()
+		death.emit()
 
 
 func handle_cast_input():
@@ -49,9 +53,8 @@ func move():
 	
 	game_grid_position = new
 	adjust_sprite(game_grid_position)
-	# ask Dennis about this
-	# fucking abomination
-	position = get_parent().transform_game_grid_position_to_screen_position(new)
+	
+	position = Gameplay.transform_game_grid_position_to_screen_position(new)
 
 
 func cast():
@@ -67,15 +70,16 @@ func cast():
 			current_spell = spells[last_input]
 			last_input = ""
 			
+			cast_finished.emit(spell.damage)
 			update_rp(spell.rp_gain)
 			update_hp(spell.hp_gain)
 			current_spell.cast.start()
 			spell.cd.start()
-		
+	
 	update_cast()
 	update_cds()
 
-
+# move this to boss encounter
 func clamp_position_to_game_grid(pos):
 	var res = Vector2(pos)
 	if pos.x < 0:
@@ -89,15 +93,15 @@ func clamp_position_to_game_grid(pos):
 		res.y = 1
 	return res
 
-
+# move this to boss arena and call it from encounter
 func adjust_sprite(pos):
 	# scale down if far away
 	if pos.y == 1:
-		scale.x = 0.5
-		scale.y = 0.5
+		scale.x = 0.65
+		scale.y = 0.65
 	else:
-		scale.x = 1
-		scale.y = 1
+		scale.x = 1.8
+		scale.y = 1.8
 		
 	# flip vertically if on the right side
 	if pos.x == 1:
@@ -122,7 +126,7 @@ func get_move_direction():
 func _on_speed_increase_timeout():
 	rp_drain += rp_drain_increase
 	if speed < speed_max:
-		speed = min(speed + 1, 200)
+		speed = min(speed + speed_increase, 200)
 	
 	speed_update.emit(speed)
 

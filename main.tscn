@@ -1,29 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cefolfi68yesi"]
+[gd_scene load_steps=3 format=3 uid="uid://cefolfi68yesi"]
 
+[ext_resource type="PackedScene" uid="uid://dvo8widodurpy" path="res://boss_encounter.tscn" id="2_vkhdm"]
 [ext_resource type="PackedScene" uid="uid://dwmquebmd4hmc" path="res://ui.tscn" id="3_5v3ig"]
-[ext_resource type="PackedScene" uid="uid://c3hptydxrviaf" path="res://gameplay.tscn" id="3_kt8nx"]
-[ext_resource type="PackedScene" uid="uid://tpfcovaqt8ft" path="res://characters/player.tscn" id="4_0on4u"]
-[ext_resource type="Texture2D" uid="uid://cmghhdkx5uq3g" path="res://assets/background_space.jpg" id="5_ec6h5"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Background" type="TextureRect" parent="."]
-offset_left = -1347.0
-offset_top = -1033.0
-offset_right = 1653.0
-offset_bottom = 967.0
-texture = ExtResource("5_ec6h5")
+[node name="UI" parent="." node_paths=PackedStringArray("boss_enc") instance=ExtResource("3_5v3ig")]
+boss_enc = NodePath("../Boss Encounter")
 
-[node name="UI" parent="." instance=ExtResource("3_5v3ig")]
+[node name="Boss Encounter" parent="." instance=ExtResource("2_vkhdm")]
 
-[node name="Gameplay" parent="." instance=ExtResource("3_kt8nx")]
-
-[node name="Player" parent="Gameplay" instance=ExtResource("4_0on4u")]
-
-[connection signal="game_start" from="Gameplay" to="Gameplay/Player" method="_on_gameplay_game_start"]
-[connection signal="cast_update" from="Gameplay/Player" to="UI" method="_on_player_cast_update"]
-[connection signal="cd_update" from="Gameplay/Player" to="UI" method="_on_player_cd_update"]
-[connection signal="hp_update" from="Gameplay/Player" to="UI" method="_on_player_hp_update"]
-[connection signal="player_death" from="Gameplay/Player" to="UI" method="_on_player_player_death"]
-[connection signal="rp_update" from="Gameplay/Player" to="UI" method="_on_player_rp_update"]
-[connection signal="speed_update" from="Gameplay/Player" to="UI" method="_on_player_speed_update"]
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
