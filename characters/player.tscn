@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://tpfcovaqt8ft"]
+
+[ext_resource type="PackedScene" uid="uid://c6entll4i1ycb" path="res://characters/character.tscn" id="1_1rjxf"]
+[ext_resource type="Script" path="res://characters/player.gd" id="2_cb2nx"]
+[ext_resource type="Texture2D" uid="uid://d0dq1vx4vvwa0" path="res://assets/character.png" id="2_v10e0"]
+[ext_resource type="PackedScene" uid="uid://dphe0i65buw82" path="res://characters/spell.tscn" id="3_swxrc"]
+[ext_resource type="AudioStream" uid="uid://dkyjuhp143duf" path="res://assets/mb.ogg" id="5_el2qn"]
+[ext_resource type="AudioStream" uid="uid://w7piaqpph5kt" path="res://assets/mf.ogg" id="6_xsnbd"]
+[ext_resource type="AudioStream" uid="uid://bjfuosjxw4lo0" path="res://assets/vb.ogg" id="7_joacv"]
+[ext_resource type="AudioStream" uid="uid://bc1j0wdxx8jhc" path="res://assets/swd.ogg" id="8_vpiup"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_es7kq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v10e0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" instance=ExtResource("1_1rjxf")]
+z_index = 20
+position = Vector2(-1, 140)
+sprite_frames = SubResource("SpriteFrames_es7kq")
+offset = Vector2(1, -140)
+script = ExtResource("2_cb2nx")
+rp_drain_initial = 6.0
+rp_drain_increase = 0.3
+
+[node name="SpeedIncrease" type="Timer" parent="." index="2"]
+
+[node name="ResourceDrain" type="Timer" parent="." index="3"]
+wait_time = 0.1
+
+[node name="Void Bolt" parent="." index="4" instance=ExtResource("3_swxrc")]
+damage = 150
+cd_original = 4.5
+rp_gain = 32
+
+[node name="Mind Blast" parent="." index="5" instance=ExtResource("3_swxrc")]
+damage = 200
+cd_original = 6.0
+rp_gain = 40
+
+[node name="Shadow Word Death" parent="." index="6" instance=ExtResource("3_swxrc")]
+damage = 250
+cd_original = 12.0
+rp_gain = 60
+hp_gain = -10
+
+[node name="Mind Flay" parent="." index="7" instance=ExtResource("3_swxrc")]
+rp_gain = 12
+
+[node name="Shadow Mend" parent="." index="8" instance=ExtResource("3_swxrc")]
+damage = 0
+rp_gain = 0
+hp_gain = 25
+
+[node name="Healing Potion" parent="." index="9" instance=ExtResource("3_swxrc")]
+damage = 0
+cd_original = 60.0
+rp_gain = 0
+hp_gain = 100
+can_speed_up = false
+
+[node name="Sound Mind Blast" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("5_el2qn")
+max_polyphony = 10
+
+[node name="Sound Mind Flay" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource("6_xsnbd")
+max_polyphony = 10
+
+[node name="Sound Void Bolt" type="AudioStreamPlayer" parent="." index="12"]
+stream = ExtResource("7_joacv")
+max_polyphony = 10
+
+[node name="Sound Shadow Word Death" type="AudioStreamPlayer" parent="." index="13"]
+stream = ExtResource("8_vpiup")
+max_polyphony = 10
+
+[connection signal="timeout" from="SpeedIncrease" to="." method="_on_speed_increase_timeout"]
+[connection signal="timeout" from="ResourceDrain" to="." method="_on_resource_drain_timeout"]

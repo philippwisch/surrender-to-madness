@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnpvo8q6c74gt"]
+
+[ext_resource type="Texture2D" uid="uid://cenfrqsdiohtd" path="res://assets/column.png" id="1_eqmjg"]
+
+[node name="Column" type="Sprite2D"]
+texture = ExtResource("1_eqmjg")
+offset = Vector2(1.66675, 137.833)

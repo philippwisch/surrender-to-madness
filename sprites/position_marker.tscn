@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfaljnimoamih"]
+
+[ext_resource type="Texture2D" uid="uid://dyu7tshgnv8ps" path="res://assets/marker.png" id="1_518gy"]
+
+[node name="PositionMarker" type="Sprite2D"]
+z_index = 1
+texture = ExtResource("1_518gy")

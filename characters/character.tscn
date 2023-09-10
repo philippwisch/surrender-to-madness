@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6entll4i1ycb"]
+
+[ext_resource type="Script" path="res://characters/character.gd" id="1_koj31"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rbncw"]
+
+[node name="Character" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_rbncw")
+script = ExtResource("1_koj31")
+
+[node name="GlobalCooldown" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="HitPointRegeneration" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="HitPointRegeneration" to="." method="_on_hit_point_regeneration_timeout"]
