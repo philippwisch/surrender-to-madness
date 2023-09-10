@@ -13,10 +13,10 @@ var game_grid_position = Vector2.ZERO
 
 func _ready():
 	super._ready()
-	recalculate_cds()
 
 
 func _process(_delta):
+	super._process(_delta)
 	move()
 	cast()
 	
@@ -26,7 +26,7 @@ func _process(_delta):
 
 func handle_cast_input():
 	# spell inputs are "buffered" starting at 200ms before the GlobalCooldown ends
-	if gcd.time_left < 0.2:
+	if !current_spell or current_spell.cast.time_left < 0.2:
 		if Input.is_action_pressed("ui_cast1"):
 			last_input = "Mind Flay"
 		if Input.is_action_pressed("ui_cast2"):
@@ -58,18 +58,18 @@ func cast():
 	handle_cast_input()
 
 	if last_input in spells:
-		var gcd_rdy = gcd.time_left == 0
+		var cast_rdy = true if !current_spell else current_spell.cast.time_left == 0
 		var cd_rdy = spells[last_input].cd.time_left == 0
 		
-		if gcd_rdy && cd_rdy:
+		if cast_rdy && cd_rdy:
 			var spell: Spell = spells[last_input]
 			play_spell_sound(spell.name)
-			current_cast = last_input
+			current_spell = spells[last_input]
 			last_input = ""
 			
 			update_rp(spell.rp_gain)
 			update_hp(spell.hp_gain)
-			gcd.start()
+			current_spell.cast.start()
 			spell.cd.start()
 		
 	update_cast()
@@ -123,7 +123,6 @@ func _on_speed_increase_timeout():
 	rp_drain += rp_drain_increase
 	if speed < speed_max:
 		speed = min(speed + 1, 200)
-		recalculate_cds()
 	
 	speed_update.emit(speed)
 

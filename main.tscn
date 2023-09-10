@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cefolfi68yesi"]
+[gd_scene load_steps=5 format=3 uid="uid://cefolfi68yesi"]
 
 [ext_resource type="PackedScene" uid="uid://dwmquebmd4hmc" path="res://ui.tscn" id="3_5v3ig"]
 [ext_resource type="PackedScene" uid="uid://c3hptydxrviaf" path="res://gameplay.tscn" id="3_kt8nx"]
 [ext_resource type="PackedScene" uid="uid://tpfcovaqt8ft" path="res://characters/player.tscn" id="4_0on4u"]
 [ext_resource type="Texture2D" uid="uid://cmghhdkx5uq3g" path="res://assets/background_space.jpg" id="5_ec6h5"]
-[ext_resource type="PackedScene" uid="uid://b4nmgisuvex1l" path="res://characters/boss_spaghetti.tscn" id="5_h5p4o"]
 
 [node name="Main" type="Node2D"]
 
@@ -21,10 +20,6 @@ texture = ExtResource("5_ec6h5")
 
 [node name="Player" parent="Gameplay" instance=ExtResource("4_0on4u")]
 
-[node name="Boss" parent="Gameplay" instance=ExtResource("5_h5p4o")]
-z_index = 10
-position = Vector2(811, 383)
-
 [connection signal="game_start" from="Gameplay" to="Gameplay/Player" method="_on_gameplay_game_start"]
 [connection signal="cast_update" from="Gameplay/Player" to="UI" method="_on_player_cast_update"]
 [connection signal="cd_update" from="Gameplay/Player" to="UI" method="_on_player_cd_update"]
@@ -32,5 +27,3 @@ position = Vector2(811, 383)
 [connection signal="player_death" from="Gameplay/Player" to="UI" method="_on_player_player_death"]
 [connection signal="rp_update" from="Gameplay/Player" to="UI" method="_on_player_rp_update"]
 [connection signal="speed_update" from="Gameplay/Player" to="UI" method="_on_player_speed_update"]
-[connection signal="cast_update" from="Gameplay/Boss" to="UI" method="_on_boss_cast_update"]
-[connection signal="hp_update" from="Gameplay/Boss" to="UI" method="_on_boss_hp_update"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3d8bn3h4s0fx"]
+
+[ext_resource type="PackedScene" uid="uid://dnhs7akej6157" path="res://characters/bosses/boss.tscn" id="1_unjvc"]
+[ext_resource type="Texture2D" uid="uid://c5cky4llyj5lk" path="res://assets/boss_spaghetti.png" id="2_o06f2"]
+[ext_resource type="Script" path="res://characters/bosses/flying_spaghetti_monster.gd" id="3_0hsox"]
+[ext_resource type="PackedScene" uid="uid://dphe0i65buw82" path="res://characters/spell.tscn" id="4_sv64f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_anwk2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o06f2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Flying Spaghetti Monster" instance=ExtResource("1_unjvc")]
+sprite_frames = SubResource("SpriteFrames_anwk2")
+script = ExtResource("3_0hsox")
+
+[node name="Eye Beam" parent="." index="2" instance=ExtResource("4_sv64f")]
+
+[node name="Meatball Shower" parent="." index="3" instance=ExtResource("4_sv64f")]
+
+[node name="Sound Eye Beam" type="AudioStreamPlayer" parent="." index="4"]
+
+[node name="Sound Meatball Shower" type="AudioStreamPlayer" parent="." index="5"]
+
+[node name="Timer Eye Beam" type="Timer" parent="." index="6"]
+wait_time = 2.0
+autostart = true
