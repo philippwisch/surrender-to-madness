@@ -1,17 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cefolfi68yesi"]
+[gd_scene load_steps=4 format=3 uid="uid://cefolfi68yesi"]
 
-[ext_resource type="PackedScene" uid="uid://dvo8widodurpy" path="res://boss_encounter.tscn" id="2_vkhdm"]
-[ext_resource type="PackedScene" uid="uid://dwmquebmd4hmc" path="res://ui.tscn" id="3_5v3ig"]
+[ext_resource type="Script" path="res://main.gd" id="1_57hfc"]
+[ext_resource type="PackedScene" uid="uid://dvo8widodurpy" path="res://gameplay/gameplay.tscn" id="2_vkhdm"]
+[ext_resource type="PackedScene" uid="uid://dwmquebmd4hmc" path="res://ui/ui.tscn" id="3_5v3ig"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_57hfc")
 
-[node name="UI" parent="." node_paths=PackedStringArray("boss_enc") instance=ExtResource("3_5v3ig")]
-boss_enc = NodePath("../Boss Encounter")
+[node name="UI" parent="." node_paths=PackedStringArray("gameplay") instance=ExtResource("3_5v3ig")]
+z_index = 0
+gameplay = NodePath("../Gameplay")
 
-[node name="Boss Encounter" parent="." instance=ExtResource("2_vkhdm")]
-
-[node name="Menu" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Gameplay" parent="." instance=ExtResource("2_vkhdm")]

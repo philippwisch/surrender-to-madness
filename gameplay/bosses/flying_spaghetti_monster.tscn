@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3d8bn3h4s0fx"]
 
-[ext_resource type="PackedScene" uid="uid://dnhs7akej6157" path="res://characters/bosses/boss.tscn" id="1_unjvc"]
+[ext_resource type="PackedScene" uid="uid://dnhs7akej6157" path="res://gameplay/other/boss.tscn" id="1_unjvc"]
 [ext_resource type="Texture2D" uid="uid://c5cky4llyj5lk" path="res://assets/boss_spaghetti.png" id="2_o06f2"]
-[ext_resource type="Script" path="res://characters/bosses/flying_spaghetti_monster.gd" id="3_0hsox"]
-[ext_resource type="PackedScene" uid="uid://dphe0i65buw82" path="res://characters/spell.tscn" id="4_sv64f"]
+[ext_resource type="Script" path="res://gameplay/bosses/flying_spaghetti_monster.gd" id="3_0hsox"]
+[ext_resource type="PackedScene" uid="uid://dphe0i65buw82" path="res://gameplay/other/spell.tscn" id="4_sv64f"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_anwk2"]
 animations = [{

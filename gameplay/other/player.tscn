@@ -1,15 +1,15 @@
 [gd_scene load_steps=12 format=3 uid="uid://tpfcovaqt8ft"]
 
-[ext_resource type="PackedScene" uid="uid://c6entll4i1ycb" path="res://characters/character.tscn" id="1_1rjxf"]
-[ext_resource type="Script" path="res://characters/player.gd" id="2_cb2nx"]
+[ext_resource type="PackedScene" uid="uid://c6entll4i1ycb" path="res://gameplay/other/character.tscn" id="1_1rjxf"]
+[ext_resource type="Script" path="res://gameplay/other/player.gd" id="2_cb2nx"]
 [ext_resource type="Texture2D" uid="uid://d0dq1vx4vvwa0" path="res://assets/character.png" id="2_v10e0"]
-[ext_resource type="PackedScene" uid="uid://dphe0i65buw82" path="res://characters/spell.tscn" id="3_swxrc"]
+[ext_resource type="PackedScene" uid="uid://dphe0i65buw82" path="res://gameplay/other/spell.tscn" id="3_swxrc"]
 [ext_resource type="AudioStream" uid="uid://dkyjuhp143duf" path="res://assets/mb.ogg" id="5_el2qn"]
 [ext_resource type="AudioStream" uid="uid://w7piaqpph5kt" path="res://assets/mf.ogg" id="6_xsnbd"]
 [ext_resource type="AudioStream" uid="uid://bjfuosjxw4lo0" path="res://assets/vb.ogg" id="7_joacv"]
 [ext_resource type="AudioStream" uid="uid://bc1j0wdxx8jhc" path="res://assets/swd.ogg" id="8_vpiup"]
 [ext_resource type="AudioStream" uid="uid://dthp5ee7hm5ms" path="res://assets/sm.ogg" id="9_f4f8w"]
-[ext_resource type="AudioStream" uid="uid://d0f7i8faq4s82" path="res://assets/minecraft-drinking-sound-effect.mp3" id="10_7qlob"]
+[ext_resource type="AudioStream" uid="uid://bx5wh6uj06j1b" path="res://assets/s.ogg" id="10_c76py"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_es7kq"]
 animations = [{
@@ -61,10 +61,10 @@ rp_gain = 12
 damage = 0
 hp_gain = 25
 
-[node name="Healing Potion" parent="." index="8" instance=ExtResource("3_swxrc")]
+[node name="Silence" parent="." index="8" instance=ExtResource("3_swxrc")]
 damage = 0
-cd_original = 60.0
-hp_gain = 100
+cd_original = 15.0
+cast_original = 0.0
 can_speed_up = false
 
 [node name="Sound Mind Blast" type="AudioStreamPlayer" parent="." index="9"]
@@ -87,8 +87,8 @@ max_polyphony = 10
 stream = ExtResource("9_f4f8w")
 max_polyphony = 10
 
-[node name="Sound Healing Potion" type="AudioStreamPlayer" parent="." index="14"]
-stream = ExtResource("10_7qlob")
+[node name="Sound Silence" type="AudioStreamPlayer" parent="." index="14"]
+stream = ExtResource("10_c76py")
 max_polyphony = 10
 
 [connection signal="timeout" from="SpeedIncrease" to="." method="_on_speed_increase_timeout"]

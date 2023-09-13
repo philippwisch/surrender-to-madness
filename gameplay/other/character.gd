@@ -85,9 +85,7 @@ func update_cds():
 
 	cd_update.emit(progress)
 
-# CHANGE NAME TO REFLECT CHANGE
-# CHANGE THIS TO NOT ONLY AFFECT GCD BUT CAST TIME
-# REFACTOR SPELL TO USE CAST TIME
+
 func recalculate_cds():
 	var speed_factor = 100.0 / speed
 	

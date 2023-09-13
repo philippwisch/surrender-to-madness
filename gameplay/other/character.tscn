@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6entll4i1ycb"]
 
-[ext_resource type="Script" path="res://characters/character.gd" id="1_koj31"]
+[ext_resource type="Script" path="res://gameplay/other/character.gd" id="1_koj31"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rbncw"]
 

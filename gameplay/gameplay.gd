@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name BossEncounter
+class_name Gameplay
 
 signal player_cast_update
 signal player_cd_update
@@ -20,7 +20,6 @@ var boss: Boss
 func _ready():
 	player = $Player
 	boss = $Boss
-	Gameplay.start_game()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

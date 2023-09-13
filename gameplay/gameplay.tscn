@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvo8widodurpy"]
+
+[ext_resource type="Script" path="res://gameplay/gameplay.gd" id="1_3lsxt"]
+[ext_resource type="PackedScene" uid="uid://tpfcovaqt8ft" path="res://gameplay/other/player.tscn" id="2_2v8xp"]
+[ext_resource type="PackedScene" uid="uid://cgxb0uexgelr2" path="res://gameplay/bosses/target_dummy.tscn" id="3_jkuy8"]
+[ext_resource type="PackedScene" uid="uid://bo8o0yu5tq5al" path="res://gameplay/other/boss_arena.tscn" id="4_72aho"]
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource("1_3lsxt")
+
+[node name="Boss Arena" parent="." instance=ExtResource("4_72aho")]
+
+[node name="Player" parent="." instance=ExtResource("2_2v8xp")]
+
+[node name="TargetDummy" parent="." instance=ExtResource("3_jkuy8")]

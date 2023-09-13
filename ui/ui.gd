@@ -1,6 +1,6 @@
-extends Node2D
+extends Control
 
-@export var boss_enc: BossEncounter
+@export var gameplay: Gameplay
 
 var hp
 var rp
@@ -12,15 +12,15 @@ var boss_cast
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	boss_enc.player_cast_update.connect(_on_player_cast_update)
-	boss_enc.player_cd_update.connect(_on_player_cd_update)
-	boss_enc.player_hp_update.connect(_on_player_hp_update)
-	boss_enc.player_rp_update.connect(_on_player_rp_update)
-	boss_enc.player_speed_update.connect(_on_player_speed_update)
-	boss_enc.player_death.connect(_on_player_death)
+	gameplay.player_cast_update.connect(_on_player_cast_update)
+	gameplay.player_cd_update.connect(_on_player_cd_update)
+	gameplay.player_hp_update.connect(_on_player_hp_update)
+	gameplay.player_rp_update.connect(_on_player_rp_update)
+	gameplay.player_speed_update.connect(_on_player_speed_update)
+	gameplay.player_death.connect(_on_player_death)
 	
-	boss_enc.boss_hp_update.connect(_on_boss_hp_update)
-	boss_enc.boss_cast_update.connect(_on_boss_cast_update)
+	gameplay.boss_hp_update.connect(_on_boss_hp_update)
+	gameplay.boss_cast_update.connect(_on_boss_cast_update)
 	
 	hp = get_node("Hp")
 	rp = get_node("Rp")
@@ -37,7 +37,7 @@ func _ready():
 		"Mind Blast": $Cast/CD3,
 		"Shadow Word Death": $Cast/CD4,
 		"Shadow Mend": $Cast/CDSmall1,
-		"Healing Potion": $Cast/CDSmall2,
+		"Silence": $Cast/CDSmall2,
 	}
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,14 +72,13 @@ func _on_player_speed_update(new_val):
 	$Speed.set_text("SPEED: +" + str(max(0, new_val - 100)) + "%!")
 
 # TODO
+# Maybe fade out screen
+# Player Death Animation?
 func _on_player_death():
-	#$DeathScreen.visible = true
 	pass
 
 
 func _on_boss_hp_update(new_val):
-	print(boss_hp.value)
-	print(new_val)
 	boss_hp.value = new_val * 100
 
 

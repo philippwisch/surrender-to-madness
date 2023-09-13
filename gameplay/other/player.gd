@@ -16,7 +16,7 @@ var game_grid_position = Vector2.ZERO
 
 func _ready():
 	super._ready()
-	Gameplay.game_start.connect(_on_gameplay_game_start)
+	#Gameplay.game_start.connect(_on_gameplay_game_start)
 
 
 func _process(_delta):
@@ -29,6 +29,13 @@ func _process(_delta):
 
 
 func handle_cast_input():
+	
+	# quick and dirty handling of silence:
+	# Silence is castable at any time, regardless of
+	# what other spell is currently cast or how long it's cast has left
+	if Input.is_action_pressed("ui_cast_extra2"):
+		last_input = "Silence"
+	
 	# spell inputs are "buffered" starting at 200ms before the GlobalCooldown ends
 	if !current_spell or current_spell.cast.time_left < 0.2:
 		if Input.is_action_pressed("ui_cast1"):
@@ -41,8 +48,7 @@ func handle_cast_input():
 			last_input = "Shadow Word Death"
 		if Input.is_action_pressed("ui_cast_extra1"):
 			last_input = "Shadow Mend"
-		if Input.is_action_pressed("ui_cast_extra2"):
-			last_input = "Healing Potion"			
+
 
 
 func move():
@@ -50,31 +56,39 @@ func move():
 	var cur = game_grid_position 	# current player position
 	var new = cur + dir
 	new = clamp_position_to_game_grid(new)
-	
 	game_grid_position = new
-	adjust_sprite(game_grid_position)
 	
-	position = Gameplay.transform_game_grid_position_to_screen_position(new)
-
 
 func cast():
+	#move this to _input
 	handle_cast_input()
 
 	if last_input in spells:
 		var cast_rdy = true if !current_spell else current_spell.cast.time_left == 0
 		var cd_rdy = spells[last_input].cd.time_left == 0
 		
-		if cast_rdy && cd_rdy:
-			var spell: Spell = spells[last_input]
-			play_spell_sound(spell.name)
+	# quick and dirty handling of silence:
+	# Silence is castable at any time, regardless of
+	# what other spell is currently cast or how long it's cast has left
+	# Silence doesn't trigger a cast like other spells
+	# In WoW terms it doesn't trigger a GCD and is instant
+		if last_input == "Silence":
+			if cd_rdy:
+				play_spell_sound("Silence")
+				last_input = ""
+				$Silence.cd.start()
+
+		elif cast_rdy && cd_rdy:
 			current_spell = spells[last_input]
+			play_spell_sound(current_spell.name)
+
 			last_input = ""
 			
-			cast_finished.emit(spell.damage)
-			update_rp(spell.rp_gain)
-			update_hp(spell.hp_gain)
+			cast_finished.emit(current_spell.damage)
+			update_rp(current_spell.rp_gain)
+			update_hp(current_spell.hp_gain)
 			current_spell.cast.start()
-			spell.cd.start()
+			current_spell.cd.start()
 	
 	update_cast()
 	update_cds()
@@ -138,3 +152,8 @@ func _on_resource_drain_timeout():
 func _on_gameplay_game_start():
 	$SpeedIncrease.start()
 	$ResourceDrain.start()
+	
+# TODO
+func _on_gameplay_game_stop():
+	# reset drain speed hp etc
+	pass
