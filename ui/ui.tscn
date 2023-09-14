@@ -31,7 +31,7 @@ font_size = 28
 font_size = 28
 
 [node name="UI" type="Control"]
-z_index = 10
+z_index = 1000
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_162wa")
@@ -250,11 +250,10 @@ vertical_alignment = 1
 
 [node name="Speed" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1375.0
-offset_top = 16.0
-offset_right = 1572.0
-offset_bottom = 58.0
-text = "SPEED: 100%"
+offset_left = 1364.0
+offset_top = 21.0
+offset_right = 1561.0
+offset_bottom = 63.0
 label_settings = SubResource("LabelSettings_jxoot")
 vertical_alignment = 1
 

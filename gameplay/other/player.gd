@@ -1,5 +1,7 @@
 extends Character
 
+class_name Player
+
 signal speed_update
 signal death
 signal cast_finished
@@ -16,7 +18,15 @@ var game_grid_position = Vector2.ZERO
 
 func _ready():
 	super._ready()
-	#Gameplay.game_start.connect(_on_gameplay_game_start)
+	
+	$SpeedIncrease.timeout.connect(_on_speed_increase_timeout)
+	$ResourceDrain.timeout.connect(_on_resource_drain_timeout)
+	
+	#Main.game_start.connect(_on_gameplay_game_start)
+	# For now Manual call just for testing
+	_on_gameplay_game_start()
+	
+
 
 
 func _process(_delta):
@@ -37,7 +47,7 @@ func handle_cast_input():
 		last_input = "Silence"
 	
 	# spell inputs are "buffered" starting at 200ms before the GlobalCooldown ends
-	if !current_spell or current_spell.cast.time_left < 0.2:
+	if !cur_spell or cur_spell.cast.time_left < 0.2:
 		if Input.is_action_pressed("ui_cast1"):
 			last_input = "Mind Flay"
 		if Input.is_action_pressed("ui_cast2"):
@@ -50,9 +60,11 @@ func handle_cast_input():
 			last_input = "Shadow Mend"
 
 
-
 func move():
 	var dir = get_move_direction()
+	# move.emit(MOVEMENTINFO)
+	
+	# MOVE ALL THIS
 	var cur = game_grid_position 	# current player position
 	var new = cur + dir
 	new = clamp_position_to_game_grid(new)
@@ -64,7 +76,7 @@ func cast():
 	handle_cast_input()
 
 	if last_input in spells:
-		var cast_rdy = true if !current_spell else current_spell.cast.time_left == 0
+		var cast_rdy = true if !cur_spell else cur_spell.cast.time_left == 0
 		var cd_rdy = spells[last_input].cd.time_left == 0
 		
 	# quick and dirty handling of silence:
@@ -79,16 +91,24 @@ func cast():
 				$Silence.cd.start()
 
 		elif cast_rdy && cd_rdy:
-			current_spell = spells[last_input]
-			play_spell_sound(current_spell.name)
+			cur_spell = spells[last_input]
+			play_spell_sound(cur_spell.name)
+			
+			if cur_spell.can_speed_up:
+				# update cast & cd based on current speed
+				var speed_factor = 100.0 / speed
+				var new_cd =  speed_factor * cur_spell.cd_original
+				cur_spell.cd.set_wait_time(new_cd)
+				var new_cast = speed_factor * cur_spell.cast_original
+				cur_spell.cast.set_wait_time(new_cast)
 
 			last_input = ""
 			
-			cast_finished.emit(current_spell.damage)
-			update_rp(current_spell.rp_gain)
-			update_hp(current_spell.hp_gain)
-			current_spell.cast.start()
-			current_spell.cd.start()
+			cast_finished.emit(cur_spell.damage)
+			update_rp(cur_spell.rp_gain)
+			update_hp(cur_spell.hp_gain)
+			cur_spell.cast.start()
+			cur_spell.cd.start()
 	
 	update_cast()
 	update_cds()

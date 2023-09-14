@@ -11,5 +11,3 @@ hp_regen_value = 0
 
 [node name="HitPointRegeneration" type="Timer" parent="."]
 autostart = true
-
-[connection signal="timeout" from="HitPointRegeneration" to="." method="_on_hit_point_regeneration_timeout"]

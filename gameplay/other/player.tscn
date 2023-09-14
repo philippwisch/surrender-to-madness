@@ -64,7 +64,7 @@ hp_gain = 25
 [node name="Silence" parent="." index="8" instance=ExtResource("3_swxrc")]
 damage = 0
 cd_original = 15.0
-cast_original = 0.0
+cast_original = 500.0
 can_speed_up = false
 
 [node name="Sound Mind Blast" type="AudioStreamPlayer" parent="." index="9"]
@@ -90,6 +90,3 @@ max_polyphony = 10
 [node name="Sound Silence" type="AudioStreamPlayer" parent="." index="14"]
 stream = ExtResource("10_c76py")
 max_polyphony = 10
-
-[connection signal="timeout" from="SpeedIncrease" to="." method="_on_speed_increase_timeout"]
-[connection signal="timeout" from="ResourceDrain" to="." method="_on_resource_drain_timeout"]

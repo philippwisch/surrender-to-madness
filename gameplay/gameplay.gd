@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Gameplay
 
+signal game_start
+
 signal player_cast_update
 signal player_cd_update
 signal player_hp_update
@@ -13,22 +15,29 @@ signal boss_hp_update
 signal boss_cast_update
 signal boss_death
 
-var player
+var player: Player
 var boss: Boss
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = $Player
 	boss = $Boss
+	
+	player.cast_finished.connect(_on_player_cast_finished)
+	player.cast_update.connect(_on_player_cast_update)
+	player.cd_update.connect(_on_player_cd_update)
+	player.death.connect(_on_player_death)	
+	player.hp_update.connect(_on_player_hp_update)
+	player.rp_update.connect(_on_player_rp_update)
+	player.speed_update.connect(_on_player_speed_update)
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 	
-
-
-
+	
 func _on_player_cast_update(cast_progress, cast_name):
 	player_cast_update.emit(cast_progress, cast_name)
 
