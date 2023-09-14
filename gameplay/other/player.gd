@@ -5,6 +5,7 @@ class_name Player
 signal speed_update
 signal death
 signal cast_finished
+signal move_input
 
 @export var speed_increase = 2
 @export var rp_drain_initial = 6.0			# per second
@@ -13,21 +14,15 @@ signal cast_finished
 var	rp_drain = rp_drain_initial
 var last_input: String						# used to buffer user inputs
 
-#QUESTION INIT THIS HERE OR NOT? THIS MIGHT NEED TO CHANGE LATER
-var game_grid_position = Vector2.ZERO
 
 func _ready():
 	super._ready()
-	
-	$SpeedIncrease.timeout.connect(_on_speed_increase_timeout)
-	$ResourceDrain.timeout.connect(_on_resource_drain_timeout)
+	init_signals()
 	
 	#Main.game_start.connect(_on_gameplay_game_start)
 	# For now Manual call just for testing
 	_on_gameplay_game_start()
 	
-
-
 
 func _process(_delta):
 	super._process(_delta)
@@ -62,15 +57,9 @@ func handle_cast_input():
 
 func move():
 	var dir = get_move_direction()
-	# move.emit(MOVEMENTINFO)
+	move_input.emit(dir)
 	
-	# MOVE ALL THIS
-	var cur = game_grid_position 	# current player position
-	var new = cur + dir
-	new = clamp_position_to_game_grid(new)
-	game_grid_position = new
 	
-
 func cast():
 	#move this to _input
 	handle_cast_input()
@@ -113,35 +102,9 @@ func cast():
 	update_cast()
 	update_cds()
 
-# move this to boss encounter
-func clamp_position_to_game_grid(pos):
-	var res = Vector2(pos)
-	if pos.x < 0:
-		res.x = 0
-	if pos.y < 0:
-		res.y = 0
-		
-	if pos.x > 1:
-		res.x = 1
-	if pos.y > 1:
-		res.y = 1
-	return res
 
 # move this to boss arena and call it from encounter
-func adjust_sprite(pos):
-	# scale down if far away
-	if pos.y == 1:
-		scale.x = 0.65
-		scale.y = 0.65
-	else:
-		scale.x = 1.8
-		scale.y = 1.8
-		
-	# flip vertically if on the right side
-	if pos.x == 1:
-		set_flip_h(true)
-	else:
-		set_flip_h(false)
+
 
 
 func get_move_direction():
@@ -177,3 +140,7 @@ func _on_gameplay_game_start():
 func _on_gameplay_game_stop():
 	# reset drain speed hp etc
 	pass
+	
+func init_signals():
+		$SpeedIncrease.timeout.connect(_on_speed_increase_timeout)
+		$ResourceDrain.timeout.connect(_on_resource_drain_timeout)

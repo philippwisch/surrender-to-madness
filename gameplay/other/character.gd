@@ -46,6 +46,7 @@ func _ready():
 func _process(_delta):
 	update_hp_regen_cd()
 	
+	
 func update_hp(diff_val):
 	hp += diff_val
 	
@@ -84,19 +85,19 @@ func update_cds():
 		progress[key] = p
 
 	cd_update.emit(progress)
-
-# TODO RENAME
-func update_hp_regen_cd():
-	var speed_factor = 100.0 / speed
-	
-	var new_heal_cd = speed_factor * hp_regen_cd
-	hp_regen.set_wait_time(new_heal_cd)
 	
 	
 func play_spell_sound(spell_name):
 	var key = "Sound " + spell_name
 	if key in sounds:
 		sounds[key].play()
+
+
+func update_hp_regen_cd():
+	var speed_factor = 100.0 / speed
+	
+	var new_heal_cd = speed_factor * hp_regen_cd
+	hp_regen.set_wait_time(new_heal_cd)
 
 
 func _on_hit_point_regeneration_timeout():
