@@ -69,7 +69,6 @@ func _on_player_cd_update(progress):
 
 
 func _on_player_speed_update(new_val):
-	print("test")
 	$Speed.set_text("SPEED: +" + str(max(0, new_val - 100)) + "%!")
 
 # TODO

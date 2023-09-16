@@ -18,16 +18,17 @@ animations = [{
 
 [node name="Flying Spaghetti Monster" instance=ExtResource("1_unjvc")]
 sprite_frames = SubResource("SpriteFrames_anwk2")
+flip_h = true
 script = ExtResource("3_0hsox")
 
-[node name="Eye Beam" parent="." index="2" instance=ExtResource("4_sv64f")]
+[node name="Eye Beam" parent="." index="1" instance=ExtResource("4_sv64f")]
 
-[node name="Meatball Shower" parent="." index="3" instance=ExtResource("4_sv64f")]
+[node name="Meatball Shower" parent="." index="2" instance=ExtResource("4_sv64f")]
 
-[node name="Sound Eye Beam" type="AudioStreamPlayer" parent="." index="4"]
+[node name="Sound Eye Beam" type="AudioStreamPlayer" parent="." index="3"]
 
-[node name="Sound Meatball Shower" type="AudioStreamPlayer" parent="." index="5"]
+[node name="Sound Meatball Shower" type="AudioStreamPlayer" parent="." index="4"]
 
-[node name="Timer Eye Beam" type="Timer" parent="." index="6"]
+[node name="Timer Eye Beam" type="Timer" parent="." index="5"]
 wait_time = 2.0
 autostart = true

@@ -40,6 +40,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+	
+func set_game_position_to_screen_position(game_position: Vector2, screen_position: Vector2):
+	game_position_to_screen_position[game_position] = screen_position
 
 
 func adjust_player_sprite(sprite, game_position: Vector2):

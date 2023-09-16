@@ -8,6 +8,7 @@
 script = ExtResource("1_57hfc")
 
 [node name="UI" parent="." node_paths=PackedStringArray("gameplay") instance=ExtResource("3_5v3ig")]
+z_as_relative = false
 gameplay = NodePath("../Gameplay")
 
 [node name="Gameplay" parent="." instance=ExtResource("2_vkhdm")]

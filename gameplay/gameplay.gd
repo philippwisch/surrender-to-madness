@@ -23,34 +23,47 @@ var player_game_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = $Player
-	boss = $Boss
-	boss_arena = $BossArena
-	init_signals()
+	pass
 	
-	player_game_position = Vector2(1,1)
-
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 	
 	
-func clamp_position_to_game_grid(pos):
-	var res = Vector2(pos)
-	if pos.x < boss_arena.GAME_POSITION_MIN.x:
-		res.x = boss_arena.GAME_POSITION_MIN.x
-	if pos.y < boss_arena.GAME_POSITION_MIN.y:
-		res.y = boss_arena.GAME_POSITION_MIN.y
-		
-	if pos.x > boss_arena.GAME_POSITION_MAX.x:
-		res.x = boss_arena.GAME_POSITION_MAX.x
-	if pos.y > boss_arena.GAME_POSITION_MAX.y:
-		res.y = boss_arena.GAME_POSITION_MAX.y
-	return res
+func start_game():
+	# TODO HERE: get information from ui which boss encounter the player
+	# selected
+	# just using these 2 for testing here
+	const ba_path = "res://gameplay/boss arenas/boss_arena_space.tscn"
+	const b_path = "res://gameplay/bosses/flying_spaghetti_monster.tscn"
+	
+	const p_path = "res://gameplay/other/player.tscn"
+	prepare_game(ba_path, b_path, p_path)
 	
 	
+func prepare_game(boss_arena_scene_path: String, boss_scene_path: String, player_scene_path: String):
+	boss_arena = reload_child_scene(boss_arena_scene_path, boss_arena)
+	boss = reload_child_scene(boss_scene_path, boss)
+	player = reload_child_scene(player_scene_path, player)
+
+	boss.global_position = Vector2(800, 400)
+	player_game_position = Vector2(1,1)
+	init_signals() # Connect Signals AFTER all nodes have been created
+	#game_start.emit()
+	
+	
+func reload_child_scene(scene_path: String, node_reference: Node):
+	var ref = node_reference
+	var scene
+	
+	if ref:
+		ref.queue_free()
+	scene = load(scene_path)
+	node_reference = scene.instantiate()
+	add_child(node_reference)
+	return node_reference
+
+
 func _on_player_cast_update(cast_progress, cast_name):
 	player_cast_update.emit(cast_progress, cast_name)
 
@@ -97,3 +110,17 @@ func init_signals():
 	player.move_input.connect(_on_player_move_input)
 	player.rp_update.connect(_on_player_rp_update)
 	player.speed_update.connect(_on_player_speed_update)
+	
+	
+func clamp_position_to_game_grid(pos):
+	var res = Vector2(pos)
+	if pos.x < boss_arena.GAME_POSITION_MIN.x:
+		res.x = boss_arena.GAME_POSITION_MIN.x
+	if pos.y < boss_arena.GAME_POSITION_MIN.y:
+		res.y = boss_arena.GAME_POSITION_MIN.y
+		
+	if pos.x > boss_arena.GAME_POSITION_MAX.x:
+		res.x = boss_arena.GAME_POSITION_MAX.x
+	if pos.y > boss_arena.GAME_POSITION_MAX.y:
+		res.y = boss_arena.GAME_POSITION_MAX.y
+	return res

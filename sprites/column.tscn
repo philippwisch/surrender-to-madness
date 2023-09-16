@@ -3,5 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cenfrqsdiohtd" path="res://assets/column.png" id="1_eqmjg"]
 
 [node name="Column" type="Sprite2D"]
+z_index = 20
 texture = ExtResource("1_eqmjg")
 offset = Vector2(1.66675, 137.833)

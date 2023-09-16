@@ -16,5 +16,5 @@ func cast():
 # TODO keep going here
 func _on_timer_eye_beam_timeout():
 	spells["Eye Beam"]
-	current_cast = "Eye Beam"
+	#current_cast = "Eye Beam"
 	#update_cast()	

@@ -23,7 +23,7 @@ animations = [{
 }]
 
 [node name="Player" instance=ExtResource("1_1rjxf")]
-z_index = 20
+z_index = 100
 position = Vector2(-1, 140)
 sprite_frames = SubResource("SpriteFrames_es7kq")
 offset = Vector2(1, -140)

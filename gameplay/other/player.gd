@@ -39,7 +39,8 @@ func handle_cast_input():
 	# Silence is castable at any time, regardless of
 	# what other spell is currently cast or how long it's cast has left
 	if Input.is_action_pressed("ui_cast_extra2"):
-		last_input = "Silence"
+		if $Silence.cd.time_left < 1:
+			last_input = "Silence"
 	
 	# spell inputs are "buffered" starting at 200ms before the GlobalCooldown ends
 	if !cur_spell or cur_spell.cast.time_left < 0.2:

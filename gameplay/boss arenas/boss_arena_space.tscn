@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bak1wjgvunrw2"]
+
+[ext_resource type="PackedScene" uid="uid://bo8o0yu5tq5al" path="res://gameplay/other/boss_arena.tscn" id="1_sg1em"]
+[ext_resource type="Script" path="res://gameplay/boss arenas/boss_arena_space.gd" id="2_4risy"]
+[ext_resource type="Texture2D" uid="uid://cmghhdkx5uq3g" path="res://assets/background_space.jpg" id="3_5yg25"]
+
+[sub_resource type="Curve2D" id="Curve2D_7hhqv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1410, 771, 0, 0, 0, 0, 166, 146)
+}
+point_count = 2
+
+[node name="Boss Arena" instance=ExtResource("1_sg1em")]
+script = ExtResource("2_4risy")
+
+[node name="Path2D" type="Path2D" parent="." index="0"]
+curve = SubResource("Curve2D_7hhqv")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
+position = Vector2(1410, 771)
+rotation = -2.67602
+
+[node name="BackgroundSpace" type="Sprite2D" parent="Path2D/PathFollow2D" index="0"]
+position = Vector2(-135.481, -158.033)
+rotation = 2.67517
+scale = Vector2(1, 1)
+texture = ExtResource("3_5yg25")
