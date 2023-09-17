@@ -77,6 +77,7 @@ func cast():
 				play_spell_sound("Silence")
 				last_input = ""
 				$Silence.cd.start()
+				cast_finished.emit(0, "Silence")
 
 		elif cast_rdy and cd_rdy:
 			cur_spell = spells[last_input]
@@ -92,7 +93,7 @@ func cast():
 
 			last_input = ""
 			
-			cast_finished.emit(cur_spell.damage)
+			cast_finished.emit(cur_spell.damage, cur_spell.name)
 			update_rp(cur_spell.rp_gain)
 			update_hp(cur_spell.hp_gain)
 			cur_spell.cast.start()

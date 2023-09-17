@@ -47,4 +47,4 @@ func cast():
 
 
 func interrupt_cast():
-	pass
+	cur_spell = null

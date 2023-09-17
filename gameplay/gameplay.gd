@@ -85,7 +85,9 @@ func _on_boss_hp_update(hp):
 	boss_hp_update.emit(float(hp) / float(boss.hp_max))
 
 
-func _on_player_cast_finished(damage):
+func _on_player_cast_finished(damage, name):
+	if name == "Silence":
+		boss.interrupt_cast()
 	boss.hp -= damage
 	boss_hp_update.emit(float(boss.hp) / float(boss.hp_max))
 	
