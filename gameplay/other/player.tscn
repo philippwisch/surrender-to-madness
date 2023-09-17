@@ -24,6 +24,7 @@ animations = [{
 
 [node name="Player" instance=ExtResource("1_1rjxf")]
 z_index = 100
+z_as_relative = false
 position = Vector2(-1, 140)
 sprite_frames = SubResource("SpriteFrames_es7kq")
 offset = Vector2(1, -140)
@@ -31,7 +32,7 @@ script = ExtResource("2_cb2nx")
 speed_increase = 2
 rp_drain_initial = 6.0
 rp_drain_increase = 0.3
-hp_regen_value = 1
+hp_regen_value = 2
 
 [node name="SpeedIncrease" type="Timer" parent="." index="1"]
 
@@ -64,7 +65,7 @@ hp_gain = 25
 [node name="Silence" parent="." index="8" instance=ExtResource("3_swxrc")]
 damage = 0
 cd_original = 15.0
-cast_original = 500.0
+cast_original = 999.0
 can_speed_up = false
 
 [node name="Sound Mind Blast" type="AudioStreamPlayer" parent="." index="9"]

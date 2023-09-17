@@ -3,8 +3,6 @@ extends Character
 class_name Player
 
 signal speed_update
-signal death
-signal cast_finished
 signal move_input
 
 @export var speed_increase = 2
@@ -80,7 +78,7 @@ func cast():
 				last_input = ""
 				$Silence.cd.start()
 
-		elif cast_rdy && cd_rdy:
+		elif cast_rdy and cd_rdy:
 			cur_spell = spells[last_input]
 			play_spell_sound(cur_spell.name)
 			
@@ -136,12 +134,8 @@ func _on_resource_drain_timeout():
 func _on_gameplay_game_start():
 	$SpeedIncrease.start()
 	$ResourceDrain.start()
-	
-# TODO
-func _on_gameplay_game_stop():
-	# reset drain speed hp etc
-	pass
-	
+
+
 func init_signals():
 		$SpeedIncrease.timeout.connect(_on_speed_increase_timeout)
 		$ResourceDrain.timeout.connect(_on_resource_drain_timeout)

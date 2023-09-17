@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3d8bn3h4s0fx"]
+[gd_scene load_steps=9 format=3 uid="uid://d3d8bn3h4s0fx"]
 
 [ext_resource type="PackedScene" uid="uid://dnhs7akej6157" path="res://gameplay/other/boss.tscn" id="1_unjvc"]
 [ext_resource type="Texture2D" uid="uid://c5cky4llyj5lk" path="res://assets/boss_spaghetti.png" id="2_o06f2"]
 [ext_resource type="Script" path="res://gameplay/bosses/flying_spaghetti_monster.gd" id="3_0hsox"]
 [ext_resource type="PackedScene" uid="uid://dphe0i65buw82" path="res://gameplay/other/spell.tscn" id="4_sv64f"]
+[ext_resource type="AudioStream" uid="uid://d0f7i8faq4s82" path="res://assets/minecraft-drinking-sound-effect.mp3" id="5_5jf8v"]
+[ext_resource type="AudioStream" uid="uid://q3w3png0d1op" path="res://assets/Sound Eye Beam Precast.ogg" id="5_dvn24"]
+[ext_resource type="AudioStream" uid="uid://tfw5yrrkw27a" path="res://assets/Sound Eye Beam Postcast.ogg" id="6_p4p30"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_anwk2"]
 animations = [{
@@ -18,17 +21,75 @@ animations = [{
 
 [node name="Flying Spaghetti Monster" instance=ExtResource("1_unjvc")]
 sprite_frames = SubResource("SpriteFrames_anwk2")
-flip_h = true
 script = ExtResource("3_0hsox")
+hp_regen_cd = 0.25
 
 [node name="Eye Beam" parent="." index="1" instance=ExtResource("4_sv64f")]
+damage = 55
+cd_original = 2.0
+can_speed_up = false
+global_cooldown = 2.0
+priority = 10
 
-[node name="Meatball Shower" parent="." index="2" instance=ExtResource("4_sv64f")]
+[node name="Slurping Sauce" parent="." index="2" instance=ExtResource("4_sv64f")]
+damage = 0
+cd_original = 20.0
+cast_original = 5.0
+can_speed_up = false
+global_cooldown = 5.0
+priority = 20
 
-[node name="Sound Eye Beam" type="AudioStreamPlayer" parent="." index="3"]
+[node name="Meatball Shower" parent="." index="3" instance=ExtResource("4_sv64f")]
+priority = -1
 
-[node name="Sound Meatball Shower" type="AudioStreamPlayer" parent="." index="4"]
+[node name="Sound Eye Beam Precast" type="AudioStreamPlayer" parent="." index="4"]
+stream = ExtResource("5_dvn24")
 
-[node name="Timer Eye Beam" type="Timer" parent="." index="5"]
-wait_time = 2.0
-autostart = true
+[node name="Sound Eye Beam Postcast" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("6_p4p30")
+
+[node name="Sound Meatball Shower" type="AudioStreamPlayer" parent="." index="6"]
+
+[node name="Sound Slurping Sauce" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource("5_5jf8v")
+
+[node name="Eye Beam Right" type="Node2D" parent="." index="8"]
+position = Vector2(-441.951, 422.189)
+scale = Vector2(1.98637, 2.78162)
+
+[node name="Line1" type="Line2D" parent="Eye Beam Right" index="0"]
+z_index = 110
+z_as_relative = false
+position = Vector2(194.315, -104.115)
+scale = Vector2(0.781215, 0.572218)
+points = PackedVector2Array(77, -209, 675, 349)
+default_color = Color(1, 0, 0, 1)
+
+[node name="Line2" type="Line2D" parent="Eye Beam Right" index="1"]
+z_index = 110
+z_as_relative = false
+position = Vector2(130.148, -94.8859)
+scale = Vector2(0.709529, 0.599585)
+points = PackedVector2Array(77, -209, 675, 349)
+default_color = Color(1, 0, 0, 1)
+
+[node name="Eye Beam Left" type="Node2D" parent="." index="9"]
+position = Vector2(-687, -564)
+rotation = 1.5708
+scale = Vector2(1.98637, 2.78162)
+
+[node name="Line1" type="Line2D" parent="Eye Beam Left" index="0"]
+z_index = 110
+z_as_relative = false
+position = Vector2(127.94, -152.705)
+scale = Vector2(0.781215, 0.572218)
+points = PackedVector2Array(77, -209, 675, 349)
+default_color = Color(1, 0, 0, 1)
+
+[node name="Line2" type="Line2D" parent="Eye Beam Left" index="1"]
+z_index = 110
+z_as_relative = false
+position = Vector2(130.148, -94.8859)
+scale = Vector2(0.709529, 0.599585)
+points = PackedVector2Array(77, -209, 675, 349)
+default_color = Color(1, 0, 0, 1)

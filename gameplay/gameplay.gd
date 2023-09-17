@@ -4,6 +4,7 @@ class_name Gameplay
 
 signal game_start
 
+signal player_cast_finished
 signal player_cast_update
 signal player_cd_update
 signal player_hp_update
@@ -11,6 +12,7 @@ signal player_rp_update
 signal player_speed_update
 signal player_death
 
+signal boss_cast_finished
 signal boss_hp_update
 signal boss_cast_update
 signal boss_death
@@ -64,6 +66,32 @@ func reload_child_scene(scene_path: String, node_reference: Node):
 	return node_reference
 
 
+# area of effect should be an array of Vector2 corresponding to all the
+# locations the boss ability will hit
+func _on_boss_cast_finished(damage, area_of_effect, duration: float):
+	var timer = Timer.new()
+	timer.wait_time = duration
+	if player_game_position in area_of_effect:
+		player.hp -= damage
+		player_hp_update.emit(float(player.hp) / float(player.hp_max))
+	
+	boss_cast_finished.emit()
+
+func _on_boss_cast_update(cast_progress, cast_name):
+	boss_cast_update.emit(cast_progress, cast_name)
+
+
+func _on_boss_hp_update(hp):
+	boss_hp_update.emit(float(hp) / float(boss.hp_max))
+
+
+func _on_player_cast_finished(damage):
+	boss.hp -= damage
+	boss_hp_update.emit(float(boss.hp) / float(boss.hp_max))
+	
+	player_cast_finished.emit()
+
+
 func _on_player_cast_update(cast_progress, cast_name):
 	player_cast_update.emit(cast_progress, cast_name)
 
@@ -77,20 +105,7 @@ func _on_player_death():
 
 
 func _on_player_hp_update(hp):
-	player_hp_update.emit(hp)
-
-
-func _on_player_rp_update(rp):
-	player_rp_update.emit(rp)
-
-
-func _on_player_speed_update(speed):
-	player_speed_update.emit(speed)
-
-
-func _on_player_cast_finished(damage):
-	boss.hp -= damage
-	boss_hp_update.emit(float(boss.hp) / float(boss.hp_max))
+	player_hp_update.emit(float(hp) / float(player.hp_max))
 
 
 func _on_player_move_input(dir: Vector2):
@@ -101,7 +116,19 @@ func _on_player_move_input(dir: Vector2):
 	boss_arena.adjust_player_sprite(player,player_game_position)
 
 
+func _on_player_rp_update(rp):
+	player_rp_update.emit(float(rp) / float(player.rp_max))
+
+
+func _on_player_speed_update(speed):
+	player_speed_update.emit(speed)
+
+
 func init_signals():
+	boss.cast_finished.connect(_on_boss_cast_finished)
+	boss.cast_update.connect(_on_boss_cast_update)
+	boss.hp_update.connect(_on_boss_hp_update)
+	
 	player.cast_finished.connect(_on_player_cast_finished)
 	player.cast_update.connect(_on_player_cast_update)
 	player.cd_update.connect(_on_player_cd_update)
@@ -110,8 +137,8 @@ func init_signals():
 	player.move_input.connect(_on_player_move_input)
 	player.rp_update.connect(_on_player_rp_update)
 	player.speed_update.connect(_on_player_speed_update)
-	
-	
+
+
 func clamp_position_to_game_grid(pos):
 	var res = Vector2(pos)
 	if pos.x < boss_arena.GAME_POSITION_MIN.x:

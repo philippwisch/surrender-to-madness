@@ -2,15 +2,19 @@ extends AnimatedSprite2D
 
 class_name Character
 
+signal cast_finished
+signal cast_update
+signal cast_started
+signal cd_update
+signal death
 signal hp_update
 signal rp_update
-signal cast_update
-signal cd_update
+
 
 ## Maximum Hit Points
 @export var hp_max = 100
-@export var hp_regen_value = 1
-@export var hp_regen_cd = 1
+@export var hp_regen_value: int = 1
+@export var hp_regen_cd: float = 1
 ## Maximum Ressource Power
 @export var rp_max = 100
 

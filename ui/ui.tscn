@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwmquebmd4hmc"]
+[gd_scene load_steps=10 format=3 uid="uid://dwmquebmd4hmc"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_162wa"]
+[ext_resource type="Texture2D" uid="uid://nhcr6bxlsjlv" path="res://assets/deathscreen.jpg" id="2_it5m7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sm80y"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -77,7 +78,6 @@ layout_mode = 0
 offset_left = -5.0
 offset_right = 355.0
 offset_bottom = 33.0
-text = "Test Spell"
 label_settings = SubResource("LabelSettings_k7afc")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -194,7 +194,7 @@ metadata/_edit_group_ = true
 layout_mode = 0
 offset_right = 65.0
 offset_bottom = 65.0
-text = "SWD"
+text = "SD"
 label_settings = SubResource("LabelSettings_gaham")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -286,8 +286,12 @@ layout_mode = 0
 offset_left = -10.0
 offset_right = 350.0
 offset_bottom = 33.0
-text = "Test Spell"
 label_settings = SubResource("LabelSettings_k7afc")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(820, 435)
+texture = ExtResource("2_it5m7")

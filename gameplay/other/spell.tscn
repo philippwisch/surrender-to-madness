@@ -9,6 +9,14 @@ script = ExtResource("1_yed8b")
 wait_time = 1.5
 one_shot = true
 
+[node name="GCDProgress" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
 [node name="CastProgress" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
+
+[connection signal="timeout" from="CDProgress" to="." method="_on_cd_progress_timeout"]
+[connection signal="timeout" from="GCDProgress" to="." method="_on_gcd_progress_timeout"]
+[connection signal="timeout" from="CastProgress" to="." method="_on_cast_progress_timeout"]

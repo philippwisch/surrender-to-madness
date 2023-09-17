@@ -12,16 +12,9 @@ var boss_cast
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	gameplay.player_cast_update.connect(_on_player_cast_update)
-	gameplay.player_cd_update.connect(_on_player_cd_update)
-	gameplay.player_hp_update.connect(_on_player_hp_update)
-	gameplay.player_rp_update.connect(_on_player_rp_update)
-	gameplay.player_speed_update.connect(_on_player_speed_update)
-	gameplay.player_death.connect(_on_player_death)
-	
-	gameplay.boss_hp_update.connect(_on_boss_hp_update)
-	gameplay.boss_cast_update.connect(_on_boss_cast_update)
-	
+	init_signals()
+
+
 	hp = get_node("Hp")
 	rp = get_node("Rp")
 	cast = get_node("Cast")
@@ -44,21 +37,29 @@ func _ready():
 func _process(_delta):
 	pass
 
-func _on_player_hp_update(new_val):
-	hp.value = new_val
+
+func _on_boss_cast_finished():
+	boss_cast.value = 0
+	$BossCast/CastText.set_text("")
 
 
-func _on_player_rp_update(new_val):
-	rp.value = new_val
+func _on_boss_cast_update(new_val, new_text):
+	boss_cast.value = 100 - new_val * 100
+	$BossCast/CastText.set_text(new_text)
+
+
+func _on_boss_hp_update(new_val):
+	boss_hp.value = new_val * 100
+
+
+func _on_player_cast_finished():
+	cast.value = 0
+	$Cast/CastText.set_text("")
 
 
 func _on_player_cast_update(new_val, new_text):
-	if new_val == 0:
-		cast.value = 0
-		$Cast/CastText.set_text("")
-	else:
-		cast.value = 100 - new_val * 100
-		$Cast/CastText.set_text(new_text)
+	cast.value = 100 - new_val * 100
+	$Cast/CastText.set_text(new_text)
 
 
 func _on_player_cd_update(progress):
@@ -67,25 +68,37 @@ func _on_player_cd_update(progress):
 			var new_val = 100 - progress[key] * 100
 			icons[key].value = new_val
 
+# TODO
+func _on_player_death():
+# Maybe fade out screen
+# Player Death Animation?
+	$Sprite2D.visible = true
+	pass
+
+
+func _on_player_hp_update(new_val):
+	hp.value = new_val * 100
+
+
+func _on_player_rp_update(new_val):
+	rp.value = new_val * 100
+
 
 func _on_player_speed_update(new_val):
 	$Speed.set_text("SPEED: +" + str(max(0, new_val - 100)) + "%!")
 
-# TODO
-# Maybe fade out screen
-# Player Death Animation?
-func _on_player_death():
-	pass
 
+func init_signals():
+	gameplay.boss_cast_finished.connect(_on_boss_cast_finished)
+	gameplay.boss_cast_update.connect(_on_boss_cast_update)
+	gameplay.boss_hp_update.connect(_on_boss_hp_update)
 
-func _on_boss_hp_update(new_val):
-	boss_hp.value = new_val * 100
+	gameplay.player_cast_finished.connect(_on_player_cast_finished)
+	gameplay.player_cast_update.connect(_on_player_cast_update)
+	gameplay.player_cd_update.connect(_on_player_cd_update)
+	gameplay.player_death.connect(_on_player_death)
+	gameplay.player_hp_update.connect(_on_player_hp_update)
+	gameplay.player_rp_update.connect(_on_player_rp_update)
+	gameplay.player_speed_update.connect(_on_player_speed_update)
+	
 
-
-func _on_boss_cast_update(new_val, new_text):
-	if new_val == 0:
-		cast.value = 0
-		$BossCast/CastText.set_text("")
-	else:
-		cast.value = 100 - new_val * 100
-		$BossCast/CastText.set_text(new_text)

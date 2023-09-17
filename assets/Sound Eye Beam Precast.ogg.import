@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://q3w3png0d1op"
+path="res://.godot/imported/Sound Eye Beam Precast.ogg-d9f657b580ad30cbdd83a48d2d5265fa.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sound Eye Beam Precast.ogg"
+dest_files=["res://.godot/imported/Sound Eye Beam Precast.ogg-d9f657b580ad30cbdd83a48d2d5265fa.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
