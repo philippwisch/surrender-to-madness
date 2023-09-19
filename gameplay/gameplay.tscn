@@ -4,3 +4,6 @@
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_3lsxt")
+
+[node name="Countdown" type="Timer" parent="."]
+one_shot = true

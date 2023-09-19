@@ -38,6 +38,10 @@ func _process(_delta):
 	pass
 
 
+func _on_countdown(time):
+	$Countdown.set_text(time)
+
+
 func _on_boss_cast_finished():
 	boss_cast.value = 0
 	$BossCast/CastText.set_text("")
@@ -89,6 +93,8 @@ func _on_player_speed_update(new_val):
 
 
 func init_signals():
+	gameplay.countdown.connect(_on_countdown)
+	
 	gameplay.boss_cast_finished.connect(_on_boss_cast_finished)
 	gameplay.boss_cast_update.connect(_on_boss_cast_update)
 	gameplay.boss_hp_update.connect(_on_boss_hp_update)

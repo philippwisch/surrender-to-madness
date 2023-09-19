@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bak1wjgvunrw2"]
 
-[ext_resource type="PackedScene" uid="uid://bo8o0yu5tq5al" path="res://gameplay/other/boss_arena.tscn" id="1_sg1em"]
-[ext_resource type="Script" path="res://gameplay/boss arenas/boss_arena_space.gd" id="2_4risy"]
+[ext_resource type="PackedScene" uid="uid://bo8o0yu5tq5al" path="res://gameplay/other/arena.tscn" id="1_sg1em"]
+[ext_resource type="Script" path="res://gameplay/arenas/arena_space.gd" id="2_4risy"]
 [ext_resource type="Texture2D" uid="uid://cmghhdkx5uq3g" path="res://assets/background_space.jpg" id="3_5yg25"]
 
 [sub_resource type="Curve2D" id="Curve2D_7hhqv"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwmquebmd4hmc"]
+[gd_scene load_steps=11 format=3 uid="uid://dwmquebmd4hmc"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_162wa"]
 [ext_resource type="Texture2D" uid="uid://nhcr6bxlsjlv" path="res://assets/deathscreen.jpg" id="2_it5m7"]
@@ -30,6 +30,11 @@ font_size = 28
 
 [sub_resource type="LabelSettings" id="LabelSettings_jxoot"]
 font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_0tcsn"]
+font_size = 128
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="UI" type="Control"]
 z_index = 1000
@@ -291,7 +296,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
+[node name="Countdown" type="Label" parent="."]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 77.0
+offset_right = 980.0
+offset_bottom = 227.0
+label_settings = SubResource("LabelSettings_0tcsn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(820, 435)
+position = Vector2(135, 436)
+scale = Vector2(0.138702, 0.707965)
 texture = ExtResource("2_it5m7")

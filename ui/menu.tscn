@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://mxld6511wteq"]
+[gd_scene load_steps=6 format=3 uid="uid://mxld6511wteq"]
 
 [ext_resource type="Script" path="res://ui/menu.gd" id="1_v6o22"]
-[ext_resource type="AudioStream" uid="uid://cflxkvxombobc" path="res://assets/menu_main.mp3" id="2_6mkcd"]
 [ext_resource type="Texture2D" uid="uid://dyp5kxflm8wai" path="res://assets/flame_purple.png" id="2_lsrnk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iw5mk"]
+font_size = 100
 
 [sub_resource type="Animation" id="Animation_06uqr"]
 resource_name = "burning"
@@ -26,9 +28,6 @@ _data = {
 "burning": SubResource("Animation_06uqr")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_iw5mk"]
-font_size = 100
-
 [node name="Menu" type="Control"]
 z_index = 1000
 layout_mode = 3
@@ -37,9 +36,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_v6o22")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_6mkcd")
-
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = -794.0
@@ -47,6 +43,15 @@ offset_top = -590.0
 offset_right = 2406.0
 offset_bottom = 1210.0
 color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+offset_top = 100.0
+offset_right = 1600.0
+offset_bottom = 218.0
+text = "SURRENDER TO MADNESS"
+label_settings = SubResource("LabelSettings_iw5mk")
+horizontal_alignment = 1
 
 [node name="Fire" type="Sprite2D" parent="."]
 position = Vector2(1204, 513)
@@ -58,12 +63,3 @@ hframes = 4
 libraries = {
 "": SubResource("AnimationLibrary_4nvl6")
 }
-
-[node name="Title" type="Label" parent="."]
-layout_mode = 2
-offset_top = 100.0
-offset_right = 1600.0
-offset_bottom = 218.0
-text = "SURRENDER TO MADNESS"
-label_settings = SubResource("LabelSettings_iw5mk")
-horizontal_alignment = 1

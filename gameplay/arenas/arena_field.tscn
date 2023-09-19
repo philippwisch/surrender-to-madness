@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwixy3r1do5du"]
+
+[ext_resource type="Script" path="res://gameplay/arenas/arena_field.gd" id="2_xvg3a"]
+[ext_resource type="Texture2D" uid="uid://cjjtdykv2hqmh" path="res://assets/background_field.webp" id="3_drblu"]
+
+[node name="Boss Arena"]
+script = ExtResource("2_xvg3a")
+
+[node name="BackgroundField" type="Sprite2D" parent="." index="0"]
+position = Vector2(687, 474)
+texture = ExtResource("3_drblu")

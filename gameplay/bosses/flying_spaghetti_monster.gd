@@ -6,6 +6,9 @@ var beam_direction
 func _ready():
 	super._ready()
 	init_signals()
+	
+	# manually force cd so the first ability the boss uses is not a heal at
+	# full hp
 	spells["Slurping Sauce"].cd.start()
 	spells["Slurping Sauce"].cd_ready = false
 
@@ -28,7 +31,8 @@ func _on_cast_started():
 
 
 
-func _on_cast_finished(dam, aoe, dur):
+func _on_cast_finished(dam, aoe):
+	$"Sound Eye Beam Precast".stop()
 	if cur_spell.name == "Eye Beam":
 		eye_beam_end()
 	elif cur_spell.name == "Slurping Sauce":
@@ -37,7 +41,6 @@ func _on_cast_finished(dam, aoe, dur):
 
 func eye_beam_start():
 	play_spell_sound("Eye Beam Precast")
-	effect_duration = 0.5
 	beam_direction = randi_range(0,1)
 	
 	# left
@@ -65,7 +68,7 @@ func eye_beam_end():
 
 func slurping_sauce_start():
 	play_spell_sound("Slurping Sauce")
-	hp_regen_value = hp_max / 100
+	hp_regen_value = float(hp_max) / float(100)
 	
 func slurping_sauce_end():
 	hp_regen_value = 0
@@ -78,6 +81,7 @@ func interrupt_cast():
 	
 # can you connect in super and the connection will still hold if you overwrite it
 # in a subclass?
+# Then this code could be moved
 func init_signals():
 	cast_started.connect(_on_cast_started)
 	cast_finished.connect(_on_cast_finished)

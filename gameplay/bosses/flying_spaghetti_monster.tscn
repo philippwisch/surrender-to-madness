@@ -54,6 +54,7 @@ stream = ExtResource("6_p4p30")
 stream = ExtResource("5_5jf8v")
 
 [node name="Eye Beam Right" type="Node2D" parent="." index="8"]
+visible = false
 position = Vector2(-441.951, 422.189)
 scale = Vector2(1.98637, 2.78162)
 
@@ -74,6 +75,7 @@ points = PackedVector2Array(77, -209, 675, 349)
 default_color = Color(1, 0, 0, 1)
 
 [node name="Eye Beam Left" type="Node2D" parent="." index="9"]
+visible = false
 position = Vector2(-687, -564)
 rotation = 1.5708
 scale = Vector2(1.98637, 2.78162)

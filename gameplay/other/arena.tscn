@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bo8o0yu5tq5al"]
 
-[ext_resource type="Script" path="res://gameplay/other/boss_arena.gd" id="1_hqnau"]
+[ext_resource type="Script" path="res://gameplay/other/arena.gd" id="1_hqnau"]
 
 [node name="Boss Arena" type="Node2D"]
 script = ExtResource("1_hqnau")

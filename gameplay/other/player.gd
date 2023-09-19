@@ -12,23 +12,27 @@ signal move_input
 var	rp_drain = rp_drain_initial
 var last_input: String						# used to buffer user inputs
 
+var game_running = false
 
 func _ready():
 	super._ready()
 	init_signals()
-	
-	#Main.game_start.connect(_on_gameplay_game_start)
-	# For now Manual call just for testing
-	_on_gameplay_game_start()
-	
+
 
 func _process(_delta):
-	super._process(_delta)
-	move()
-	cast()
+	if game_running:
+		super._process(_delta)
+		move()
+		cast()
 	
 	if hp == 0 or rp == 0:
 		death.emit()
+
+
+func start_game():
+	$SpeedIncrease.start()
+	$ResourceDrain.start()
+	game_running = true
 
 
 func handle_cast_input():
@@ -37,7 +41,7 @@ func handle_cast_input():
 	# Silence is castable at any time, regardless of
 	# what other spell is currently cast or how long it's cast has left
 	if Input.is_action_pressed("ui_cast_extra2"):
-		if $Silence.cd.time_left < 1:
+		if $Silence.cd.time_left < 0.2:
 			last_input = "Silence"
 	
 	# spell inputs are "buffered" starting at 200ms before the GlobalCooldown ends
@@ -60,11 +64,11 @@ func move():
 	
 	
 func cast():
-	#move this to _input
+	#move this method call to trigger on _input instead of every frame
 	handle_cast_input()
 
 	if last_input in spells:
-		var cast_rdy = true if !cur_spell else cur_spell.cast.time_left == 0
+		var cast_rdy = !cur_spell or cur_spell.cast.time_left == 0
 		var cd_rdy = spells[last_input].cd.time_left == 0
 		
 	# quick and dirty handling of silence:
@@ -130,11 +134,6 @@ func _on_speed_increase_timeout():
 
 func _on_resource_drain_timeout():
 	update_rp(- rp_drain / 10)
-
-
-func _on_gameplay_game_start():
-	$SpeedIncrease.start()
-	$ResourceDrain.start()
 
 
 func init_signals():
