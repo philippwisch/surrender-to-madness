@@ -71,23 +71,29 @@ can_speed_up = false
 [node name="Sound Mind Blast" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource("5_el2qn")
 max_polyphony = 10
+bus = &"Effects"
 
 [node name="Sound Mind Flay" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource("6_xsnbd")
 max_polyphony = 10
+bus = &"Effects"
 
 [node name="Sound Void Bolt" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource("7_joacv")
 max_polyphony = 10
+bus = &"Effects"
 
 [node name="Sound Shadow Word Death" type="AudioStreamPlayer" parent="." index="12"]
 stream = ExtResource("8_vpiup")
 max_polyphony = 10
+bus = &"Effects"
 
 [node name="Sound Shadow Mend" type="AudioStreamPlayer" parent="." index="13"]
 stream = ExtResource("9_f4f8w")
 max_polyphony = 10
+bus = &"Effects"
 
 [node name="Sound Silence" type="AudioStreamPlayer" parent="." index="14"]
 stream = ExtResource("10_c76py")
 max_polyphony = 10
+bus = &"Effects"

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://mxld6511wteq"]
+[gd_scene load_steps=8 format=3 uid="uid://mxld6511wteq"]
 
-[ext_resource type="Script" path="res://ui/menu.gd" id="1_v6o22"]
+[ext_resource type="Script" path="res://ui/title_menu.gd" id="1_v6o22"]
 [ext_resource type="Texture2D" uid="uid://dyp5kxflm8wai" path="res://assets/flame_purple.png" id="2_lsrnk"]
+[ext_resource type="PackedScene" uid="uid://c4su6mqogonri" path="res://volume_slider.tscn" id="3_mfxdw"]
+[ext_resource type="Script" path="res://volume_slider.gd" id="4_q8hmo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_iw5mk"]
 font_size = 100
@@ -31,9 +33,11 @@ _data = {
 [node name="Menu" type="Control"]
 z_index = 1000
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_v6o22")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -54,7 +58,7 @@ label_settings = SubResource("LabelSettings_iw5mk")
 horizontal_alignment = 1
 
 [node name="Fire" type="Sprite2D" parent="."]
-position = Vector2(1204, 513)
+position = Vector2(783, 499)
 scale = Vector2(10, 10)
 texture = ExtResource("2_lsrnk")
 hframes = 4
@@ -63,3 +67,38 @@ hframes = 4
 libraries = {
 "": SubResource("AnimationLibrary_4nvl6")
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 448.0
+offset_right = 365.0
+offset_bottom = 827.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "START"
+alignment = 0
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "QUIT"
+alignment = 0
+
+[node name="EffectsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "EFFECTS"
+
+[node name="EffectsSlider" parent="VBoxContainer" instance=ExtResource("3_mfxdw")]
+layout_mode = 2
+script = ExtResource("4_q8hmo")
+audio_bus_name = "Effects"
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "MUSIC"
+
+[node name="MusicSlider" parent="VBoxContainer" instance=ExtResource("3_mfxdw")]
+layout_mode = 2
+script = ExtResource("4_q8hmo")
+audio_bus_name = "Music"

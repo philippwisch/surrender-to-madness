@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c4su6mqogonri"]
+
+[node name="VolumeSlider" type="HSlider"]
+max_value = 1.0
+step = 0.05

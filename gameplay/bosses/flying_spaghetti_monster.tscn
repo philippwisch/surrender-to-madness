@@ -26,9 +26,10 @@ hp_regen_cd = 0.25
 
 [node name="Eye Beam" parent="." index="1" instance=ExtResource("4_sv64f")]
 damage = 55
-cd_original = 2.0
+cd_original = 1.0
+cast_original = 1.0
 can_speed_up = false
-global_cooldown = 2.0
+global_cooldown = 1.1
 priority = 10
 
 [node name="Slurping Sauce" parent="." index="2" instance=ExtResource("4_sv64f")]
@@ -44,14 +45,18 @@ priority = -1
 
 [node name="Sound Eye Beam Precast" type="AudioStreamPlayer" parent="." index="4"]
 stream = ExtResource("5_dvn24")
+bus = &"Effects"
 
 [node name="Sound Eye Beam Postcast" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource("6_p4p30")
+bus = &"Effects"
 
 [node name="Sound Meatball Shower" type="AudioStreamPlayer" parent="." index="6"]
+bus = &"Effects"
 
 [node name="Sound Slurping Sauce" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource("5_5jf8v")
+bus = &"Effects"
 
 [node name="Eye Beam Right" type="Node2D" parent="." index="8"]
 visible = false
