@@ -15,14 +15,15 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
-[debug]
+[autoload]
 
-gdscript/warnings/unused_parameter=0
+Music="*res://music.gd"
 
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/size/mode=2
 window/stretch/mode="viewport"
 
 [gui]

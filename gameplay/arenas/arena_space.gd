@@ -1,4 +1,4 @@
-extends BossArena
+extends Arena
 
 var prog=0
 var speed=0.005

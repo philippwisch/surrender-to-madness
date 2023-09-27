@@ -19,7 +19,7 @@ signal boss_death
 
 var player: Player
 var boss: Boss
-var arena: BossArena
+var arena: Arena
 
 var player_game_position
 
@@ -42,15 +42,11 @@ func unpause_game():
 	get_tree().paused = false
 
 
-func start_game(arena_path, boss_path):
-	# TODO HERE: get information from ui which boss encounter the player
-	# selected
-	# just using these 2 for testing here
-	const a_path = "res://gameplay/arenas/arena_space.tscn"
-	const b_path = "res://gameplay/bosses/flying_spaghetti_monster.tscn"
-	const p_path = "res://gameplay/other/player.tscn"
-	
-	prepare_game(a_path, b_path, p_path)
+func start_game(boss_name):
+	# Todo start music
+	# store music in boss arena, or maybe even boss
+	#Music.load_and_play()
+	prepare_game(boss_name)
 	
 	$Countdown.timeout.connect(on_countdown_timeout)
 	# emit once at the start so the 3 shows up instantly
@@ -69,10 +65,16 @@ func on_countdown_timeout():
 		countdown.emit("")
 
 
-func prepare_game(arena_scene_path: String, boss_scene_path: String, player_scene_path: String):
-	arena = reload_child_scene(arena_scene_path, arena)
-	boss = reload_child_scene(boss_scene_path, boss)
-	player = reload_child_scene(player_scene_path, player)
+func prepare_game(boss_name):
+	var b_path = "res://gameplay/bosses/" + boss_name + ".tscn"
+	boss = reload_child_scene(b_path, boss)
+	
+	var a_path = boss.arena_path
+	arena = reload_child_scene(a_path, arena)
+	
+	var p_path = "res://gameplay/other/player.tscn"
+	player = reload_child_scene(p_path, player)
+	
 	init_signals() # Connect Signals AFTER all nodes have been created
 	
 	boss.global_position = Vector2(800, 400)
@@ -109,8 +111,8 @@ func _on_boss_hp_update(hp):
 	boss_hp_update.emit(float(hp) / float(boss.hp_max))
 
 
-func _on_player_cast_finished(damage, name):
-	if name == "Silence":
+func _on_player_cast_finished(damage, cast_name):
+	if cast_name == "Silence":
 		boss.interrupt_cast()
 		boss_cast_update.emit(1, "Interrupted")
 	boss.update_hp(-damage)

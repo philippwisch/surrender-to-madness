@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://ui/title_menu.gd" id="1_v6o22"]
 [ext_resource type="Texture2D" uid="uid://dyp5kxflm8wai" path="res://assets/flame_purple.png" id="2_lsrnk"]
-[ext_resource type="PackedScene" uid="uid://c4su6mqogonri" path="res://volume_slider.tscn" id="3_mfxdw"]
-[ext_resource type="Script" path="res://volume_slider.gd" id="4_q8hmo"]
+[ext_resource type="PackedScene" uid="uid://c4su6mqogonri" path="res://ui/volume_slider.tscn" id="3_mfxdw"]
+[ext_resource type="Script" path="res://ui/volume_slider.gd" id="4_q8hmo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_iw5mk"]
 font_size = 100
@@ -42,10 +42,8 @@ script = ExtResource("1_v6o22")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = -794.0
-offset_top = -590.0
-offset_right = 2406.0
-offset_bottom = 1210.0
+offset_right = 1600.0
+offset_bottom = 900.0
 color = Color(0, 0, 0, 1)
 
 [node name="Title" type="Label" parent="."]
@@ -58,7 +56,7 @@ label_settings = SubResource("LabelSettings_iw5mk")
 horizontal_alignment = 1
 
 [node name="Fire" type="Sprite2D" parent="."]
-position = Vector2(783, 499)
+position = Vector2(1036, 474)
 scale = Vector2(10, 10)
 texture = ExtResource("2_lsrnk")
 hframes = 4
@@ -68,37 +66,59 @@ libraries = {
 "": SubResource("AnimationLibrary_4nvl6")
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 103.0
-offset_top = 448.0
-offset_right = 365.0
-offset_bottom = 827.0
+[node name="OptionsPanel" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 150.0
+offset_top = 354.0
+offset_right = 654.0
+offset_bottom = 736.0
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Main" type="VBoxContainer" parent="OptionsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="OptionsPanel/Main"]
 layout_mode = 2
 text = "START"
 alignment = 0
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="OptionsPanel/Main"]
 layout_mode = 2
 text = "QUIT"
 alignment = 0
 
-[node name="EffectsLabel" type="Label" parent="VBoxContainer"]
+[node name="EffectsLabel" type="Label" parent="OptionsPanel/Main"]
 layout_mode = 2
 text = "EFFECTS"
 
-[node name="EffectsSlider" parent="VBoxContainer" instance=ExtResource("3_mfxdw")]
+[node name="EffectsSlider" parent="OptionsPanel/Main" instance=ExtResource("3_mfxdw")]
 layout_mode = 2
 script = ExtResource("4_q8hmo")
 audio_bus_name = "Effects"
 
-[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+[node name="MusicLabel" type="Label" parent="OptionsPanel/Main"]
 layout_mode = 2
 text = "MUSIC"
 
-[node name="MusicSlider" parent="VBoxContainer" instance=ExtResource("3_mfxdw")]
+[node name="MusicSlider" parent="OptionsPanel/Main" instance=ExtResource("3_mfxdw")]
 layout_mode = 2
 script = ExtResource("4_q8hmo")
 audio_bus_name = "Music"
+
+[node name="Bosses" type="VBoxContainer" parent="OptionsPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="Button" parent="OptionsPanel/Bosses"]
+layout_mode = 2
+text = "Back"
+alignment = 0

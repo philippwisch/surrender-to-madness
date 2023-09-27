@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://gameplay/other/arena.gd" id="1_hqnau"]
 
-[node name="Boss Arena" type="Node2D"]
+[node name="Arena" type="Node2D"]
 script = ExtResource("1_hqnau")

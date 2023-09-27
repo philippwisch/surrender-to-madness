@@ -10,7 +10,7 @@ _data = {
 }
 point_count = 2
 
-[node name="Boss Arena" instance=ExtResource("1_sg1em")]
+[node name="Arena" instance=ExtResource("1_sg1em")]
 script = ExtResource("2_4risy")
 
 [node name="Path2D" type="Path2D" parent="." index="0"]
@@ -23,5 +23,4 @@ rotation = -2.67602
 [node name="BackgroundSpace" type="Sprite2D" parent="Path2D/PathFollow2D" index="0"]
 position = Vector2(-135.481, -158.033)
 rotation = 2.67517
-scale = Vector2(1, 1)
 texture = ExtResource("3_5yg25")

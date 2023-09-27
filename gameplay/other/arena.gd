@@ -1,6 +1,6 @@
 extends Node2D
 
-class_name BossArena
+class_name Arena
 
 # Default Layout will be 4x4
 

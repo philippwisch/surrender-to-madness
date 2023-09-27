@@ -3,12 +3,14 @@ extends Character
 class_name Boss
 
 var area_of_effect = []
-
 var game_running = false
+	# default fallback arena. Overwrite this in subclasses
+var arena_path = "res://gameplay/arenas/arena_field.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

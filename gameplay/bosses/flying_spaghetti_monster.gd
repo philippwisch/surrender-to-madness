@@ -6,6 +6,7 @@ var beam_direction
 func _ready():
 	super._ready()
 	init_signals()
+	arena_path = "res://gameplay/arenas/arena_space.tscn"
 	
 	# manually force cd so the first ability the boss uses is not a heal at
 	# full hp

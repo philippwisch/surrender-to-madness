@@ -1,17 +1,12 @@
-extends Node2D
+extends Control
 
 var game_paused = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	start_game()
-	pass
+	init_signals()
+	#start_game()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-	
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		if game_paused:
@@ -19,7 +14,12 @@ func _input(event):
 		else:
 			$Gameplay.pause_game()
 		game_paused = !game_paused
-	
-func start_game():
-	$Gameplay.start_game("dummy","dummy")
-	# stop main menu music
+
+
+func _on_title_menu_boss_selected(boss_name: String):
+	$Gameplay.start_game(boss_name)
+	$TitleMenu.visible = false
+
+
+func init_signals():
+	$TitleMenu.start_game.connect(_on_title_menu_boss_selected)
