@@ -27,6 +27,7 @@ func _input(event):
 
 
 func _start_game(boss_name: String):
+	# TODO here save save the music path in boss and retrieve it here
 	Music.load_and_play("res://assets/arena_space_music.mp3")
 	current_boss = boss_name
 	in_game = true

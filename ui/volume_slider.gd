@@ -7,17 +7,29 @@ extends HSlider
 
 
 func _ready():
-	value_changed.connect(_on_value_changed)
-	AudioServer.bus_layout_changed.connect(_on_audio_bus_bus_layout_changed)
-	# todo load from userpref.ini
-	
-	# this line is now obsolete
-	value = db_to_linear(AudioServer.get_bus_volume_db(_bus))
+	init_signals()
+
+	if audio_bus_name == "Music":
+		update_volume(Config.music_volume)
+	elif audio_bus_name == "Effects":
+		update_volume(Config.effects_volume)
 
 
 func _on_value_changed(new_value: float):
-	AudioServer.set_bus_volume_db(_bus, linear_to_db(new_value))
-	
+	update_volume(new_value)
+
+
+func _on_audio_bus_bus_layout_changed():
+	value = db_to_linear(AudioServer.get_bus_volume_db(_bus))
+
+
+func init_signals():
+	value_changed.connect(_on_value_changed)
+	AudioServer.bus_layout_changed.connect(_on_audio_bus_bus_layout_changed)
+
+
+func update_volume(volume):
+	AudioServer.set_bus_volume_db(_bus, linear_to_db(volume))
 	# I ran into a problem here because I use this VolumeSlider in both the
 	# pause menu as well as the title menu. If the user moves one slider
 	# (for example music in title), this method will correctly update
@@ -31,10 +43,10 @@ func _on_value_changed(new_value: float):
 	# one-way data-binding from the ui layer to the logic layer.
 	#
 	# to fix this issue and provide two-way data-binding, the global AudioServer's
-	# Signal bus_layout_changed is triggered. Documentation on bus_layout is rather
+	# Signal bus_layout_changed is triggered. Then _on_audio_bus_bus_layout_changed
+	# gets connected to this signal and will update the sliders value
+	# Documentation on bus_layout is rather
 	# sparse but it seems like a change in volume should probably trigger this signal
 	# but does not, so I just do it manually in the following line:
 	AudioServer.bus_layout_changed.emit()
-
-func _on_audio_bus_bus_layout_changed():
-	value = db_to_linear(AudioServer.get_bus_volume_db(_bus))
+	Config.save(audio_bus_name, volume)
