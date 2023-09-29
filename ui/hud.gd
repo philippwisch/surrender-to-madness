@@ -105,7 +105,6 @@ func init_signals():
 	gameplay.player_cast_finished.connect(_on_player_cast_finished)
 	gameplay.player_cast_update.connect(_on_player_cast_update)
 	gameplay.player_cd_update.connect(_on_player_cd_update)
-	gameplay.player_death.connect(_on_player_death)
 	gameplay.player_hp_update.connect(_on_player_hp_update)
 	gameplay.player_rp_update.connect(_on_player_rp_update)
 	gameplay.player_speed_update.connect(_on_player_speed_update)

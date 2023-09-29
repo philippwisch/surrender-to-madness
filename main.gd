@@ -42,6 +42,14 @@ func _continue_game():
 	$Gameplay.unpause_game()
 	set_ui_visibility(false, true, false, false)
 
+
+func _game_over():
+	in_game = false
+	game_paused = true
+	$Gameplay.pause_game()
+	set_ui_visibility(true, false, false, false)
+
+
 func _quit():
 	get_tree().quit()
 
@@ -57,6 +65,7 @@ func _restart_game():
 
 
 func init_signals():
+	$Gameplay.game_over.connect(_game_over)
 	$TitleMenu.start_game.connect(_start_game)
 	$TitleMenu.quit.connect(_quit)
 	

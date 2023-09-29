@@ -10,12 +10,12 @@ signal player_cd_update
 signal player_hp_update
 signal player_rp_update
 signal player_speed_update
-signal player_death
 
 signal boss_cast_finished
 signal boss_hp_update
 signal boss_cast_update
-signal boss_death
+
+signal game_over
 
 var player: Player
 var boss: Boss
@@ -109,6 +109,10 @@ func _on_boss_cast_update(cast_progress, cast_name):
 	boss_cast_update.emit(cast_progress, cast_name)
 
 
+func _on_boss_death():
+	game_over.emit()
+
+
 func _on_boss_hp_update(hp):
 	boss_hp_update.emit(float(hp) / float(boss.hp_max))
 
@@ -131,8 +135,7 @@ func _on_player_cd_update(progress):
 
 
 func _on_player_death():
-	player_death.emit()
-	# game_end.emit()
+	game_over.emit()
 
 
 func _on_player_hp_update(hp):
@@ -158,6 +161,7 @@ func _on_player_speed_update(speed):
 func init_signals():
 	boss.cast_finished.connect(_on_boss_cast_finished)
 	boss.cast_update.connect(_on_boss_cast_update)
+	boss.death.connect(_on_boss_death)
 	boss.hp_update.connect(_on_boss_hp_update)
 	
 	player.cast_finished.connect(_on_player_cast_finished)
