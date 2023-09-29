@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cflxkvxombobc" path="res://assets/menu_main.mp3" id="1_reocy"]
 
 [node name="Music" type="AudioStreamPlayer"]
+process_mode = 3
 stream = ExtResource("1_reocy")
 autoplay = true
 bus = &"Music"

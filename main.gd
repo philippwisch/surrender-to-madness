@@ -42,7 +42,6 @@ func _quit():
 func _quit_to_title():
 	in_game = false
 	game_paused = false
-	$Gameplay.unpause_game()
 	set_ui_visibility(false, false, false, true)
 	
 func _restart_game():
