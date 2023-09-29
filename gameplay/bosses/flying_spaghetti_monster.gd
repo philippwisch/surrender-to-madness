@@ -69,6 +69,7 @@ func eye_beam_end():
 
 func slurping_sauce_start():
 	play_spell_sound("Slurping Sauce")
+	# Integer division, because hp is int
 	hp_regen_value = hp_max / 100
 	
 func slurping_sauce_end():

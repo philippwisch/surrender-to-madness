@@ -29,6 +29,11 @@ func _process(_delta):
 		death.emit()
 
 
+func emit_all():
+	super.emit_all()
+	speed_update.emit(speed)
+
+
 func start_game():
 	$SpeedIncrease.start()
 	$ResourceDrain.start()

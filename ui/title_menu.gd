@@ -9,7 +9,6 @@ var main_vbox
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Music.load_and_play("res://assets/menu_main.mp3", 1.5)
 	create_boss_buttons()
 	init_signals()
 	

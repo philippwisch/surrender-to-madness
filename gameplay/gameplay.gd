@@ -36,9 +36,6 @@ func unpause_game():
 
 
 func start_game(boss_name):
-	# Todo start music
-	# store music in boss arena, or maybe even boss
-	#Music.load_and_play()
 	prepare_game(boss_name)
 	
 	create_countdown_timer()

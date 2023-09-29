@@ -1,13 +1,15 @@
 extends Control
 
-var game_paused = false
-var in_game = false
+var game_paused: bool
+var in_game: bool
 
 var current_boss: String
+var game_music_position
 
 func _ready():
 	init_signals()
-
+	# the game will start in title menu
+	_quit_to_title()
 
 func _input(event):
 	if in_game:
@@ -15,13 +17,17 @@ func _input(event):
 			if game_paused:
 				$PauseMenu.visible = false
 				$Gameplay.unpause_game()
+				Music.load_and_play("res://assets/arena_space_music.mp3", game_music_position)
 			else:
 				$PauseMenu.visible = true
 				$Gameplay.pause_game()
+				game_music_position = Music.get_playback_position()
+				Music.load_and_play("res://assets/menu_pause.mp3")
 			game_paused = !game_paused
 
 
 func _start_game(boss_name: String):
+	Music.load_and_play("res://assets/arena_space_music.mp3")
 	current_boss = boss_name
 	in_game = true
 	game_paused = false
@@ -41,7 +47,8 @@ func _quit():
 
 func _quit_to_title():
 	in_game = false
-	game_paused = false
+	game_paused = false	
+	Music.load_and_play("res://assets/menu_main.mp3", 1.5)
 	set_ui_visibility(false, false, false, true)
 	
 func _restart_game():

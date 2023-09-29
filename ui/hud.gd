@@ -89,7 +89,10 @@ func _on_player_rp_update(new_val):
 
 
 func _on_player_speed_update(new_val):
-	$Speed.set_text("SPEED: +" + str(max(0, new_val - 100)) + "%!")
+	if new_val == 100:
+		$Speed.set_text("")
+	else:
+		$Speed.set_text("SPEED: +" + str(max(0, new_val - 100)) + "%!")
 
 
 func init_signals():
