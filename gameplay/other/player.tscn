@@ -23,7 +23,6 @@ animations = [{
 }]
 
 [node name="Player" instance=ExtResource("1_1rjxf")]
-modulate = Color(0.227451, 0, 0.513726, 1)
 z_index = 100
 z_as_relative = false
 position = Vector2(-1, 140)

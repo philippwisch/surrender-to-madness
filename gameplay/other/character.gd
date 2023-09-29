@@ -56,8 +56,7 @@ func emit_all():
 	update_hp(hp_max)
 	update_rp(rp_max)
 	update_cast()
-	#cast_update.emit(1,"")
-	
+	update_cds()
 
 
 func update_hp(diff_val):
@@ -87,6 +86,8 @@ func update_cast():
 		var cast_progress = (cur_spell.cast.time_left / cur_spell.cast.get_wait_time())
 		var cast_name = cur_spell.name
 		cast_update.emit(cast_progress, cast_name)
+	else:
+		cast_update.emit(1,"")
 
 
 func update_cds():
