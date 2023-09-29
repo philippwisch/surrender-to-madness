@@ -24,15 +24,8 @@ var arena: Arena
 var player_game_position
 
 # used when starting the game
-var countdown_progress = 3
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+var countdown_timer: Timer
+var countdown_progress: int
 
 
 func pause_game():
@@ -48,16 +41,25 @@ func start_game(boss_name):
 	#Music.load_and_play()
 	prepare_game(boss_name)
 	
-	$Countdown.timeout.connect(on_countdown_timeout)
+	create_countdown_timer()
+	
 	# emit once at the start so the 3 shows up instantly
 	countdown.emit(str(countdown_progress))
-	$Countdown.start()
+	countdown_timer.start()
+
+
+func create_countdown_timer():
+	countdown_progress = 3
+	countdown_timer = Timer.new()
+	add_child(countdown_timer)
+	countdown_timer.one_shot = true
+	countdown_timer.timeout.connect(on_countdown_timeout)	
 
 
 func on_countdown_timeout():
 	if countdown_progress > 1:
 		countdown_progress -= 1
-		$Countdown.start()
+		countdown_timer.start()
 		countdown.emit(str(countdown_progress))
 	else:
 		player.start_game()
@@ -77,6 +79,10 @@ func prepare_game(boss_name):
 	
 	init_signals() # Connect Signals AFTER all nodes have been created
 	
+	# the HUD needs to be initialized with initial values from boss and player
+	player.emit_all()
+	boss.emit_all()
+	
 	boss.global_position = Vector2(800, 400)
 	player_game_position = Vector2(1,1)
 	# run move once to move player to starting position
@@ -85,14 +91,13 @@ func prepare_game(boss_name):
 
 func reload_child_scene(scene_path: String, node_reference: Node):
 	var ref = node_reference
-	var scene
 	
 	if ref:
 		ref.queue_free()
-	scene = load(scene_path)
-	node_reference = scene.instantiate()
-	add_child(node_reference)
-	return node_reference
+	var scene = load(scene_path)
+	ref = scene.instantiate()
+	add_child(ref)
+	return ref
 
 
 # area of effect should be an array of Vector2 corresponding to all the

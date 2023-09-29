@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnqw2c3h5g2ff"]
+
+[ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_cdhtq"]
+[ext_resource type="PackedScene" uid="uid://cgh3jt5yn1yfb" path="res://sprites/fire.tscn" id="2_o1v7e"]
+[ext_resource type="PackedScene" uid="uid://c4su6mqogonri" path="res://ui/volume_slider.tscn" id="2_ofwvk"]
+[ext_resource type="Script" path="res://ui/volume_slider.gd" id="3_frg88"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_efirn"]
+font_size = 100
+
+[node name="PauseMenu" type="Control"]
+z_index = 2000
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1600.0
+offset_bottom = -359.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cdhtq")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = -24.0
+offset_right = 454.0
+offset_bottom = 942.0
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 12.0
+offset_right = 453.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 62
+text = "STM"
+label_settings = SubResource("LabelSettings_efirn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsPanel" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 452.0
+offset_right = 437.0
+offset_bottom = 850.0
+
+[node name="CountinueGameButton" type="Button" parent="OptionsPanel"]
+layout_mode = 2
+text = "CONTINUE"
+
+[node name="RestartGameButton" type="Button" parent="OptionsPanel"]
+layout_mode = 2
+text = "RESTART"
+
+[node name="QuitToTitleButton" type="Button" parent="OptionsPanel"]
+layout_mode = 2
+text = "QUIT TO TITLE"
+
+[node name="ExitGameButton" type="Button" parent="OptionsPanel"]
+layout_mode = 2
+text = "EXIT GAME"
+
+[node name="EffectsLabel" type="Label" parent="OptionsPanel"]
+layout_mode = 2
+text = "EFFECTS"
+
+[node name="EffectsSlider" parent="OptionsPanel" instance=ExtResource("2_ofwvk")]
+layout_mode = 2
+script = ExtResource("3_frg88")
+audio_bus_name = "Effects"
+
+[node name="MusicLabel" type="Label" parent="OptionsPanel"]
+layout_mode = 2
+text = "MUSIC"
+
+[node name="MusicSlider" parent="OptionsPanel" instance=ExtResource("2_ofwvk")]
+layout_mode = 2
+script = ExtResource("3_frg88")
+audio_bus_name = "Music"
+
+[node name="Fire" parent="." instance=ExtResource("2_o1v7e")]
+position = Vector2(264, 264)

@@ -32,7 +32,7 @@ func _on_cast_started():
 
 
 
-func _on_cast_finished(dam, aoe):
+func _on_cast_finished(_dam, _aoe):
 	$"Sound Eye Beam Precast".stop()
 	if cur_spell.name == "Eye Beam":
 		eye_beam_end()
@@ -69,7 +69,7 @@ func eye_beam_end():
 
 func slurping_sauce_start():
 	play_spell_sound("Slurping Sauce")
-	hp_regen_value = float(hp_max) / float(100)
+	hp_regen_value = hp_max / 100
 	
 func slurping_sauce_end():
 	hp_regen_value = 0

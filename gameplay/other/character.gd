@@ -44,13 +44,22 @@ func _ready():
 			spells[child.name] = child
 		if child is AudioStreamPlayer:
 			sounds[child.name] = child
+	
 	update_hp_regen_cd()
 
 
 func _process(_delta):
 	update_hp_regen_cd()
+
+
+func emit_all():
+	update_hp(hp_max)
+	update_rp(rp_max)
+	update_cast()
+	#cast_update.emit(1,"")
 	
-	
+
+
 func update_hp(diff_val):
 	hp += diff_val
 	
@@ -70,7 +79,7 @@ func update_rp(diff_val):
 	if rp > rp_max:
 		rp = rp_max
 
-	rp_update.emit(rp)	
+	rp_update.emit(rp)
 
 
 func update_cast():

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cefolfi68yesi"]
+[gd_scene load_steps=6 format=3 uid="uid://cefolfi68yesi"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_57hfc"]
 [ext_resource type="PackedScene" uid="uid://dvo8widodurpy" path="res://gameplay/gameplay.tscn" id="2_vkhdm"]
 [ext_resource type="PackedScene" uid="uid://dwmquebmd4hmc" path="res://ui/hud.tscn" id="3_5v3ig"]
 [ext_resource type="PackedScene" uid="uid://mxld6511wteq" path="res://ui/title_menu.tscn" id="4_pj6m5"]
+[ext_resource type="PackedScene" uid="uid://dnqw2c3h5g2ff" path="res://ui/pause_menu.tscn" id="4_s8w8h"]
 
 [node name="Main" type="Control"]
 process_mode = 3
@@ -20,20 +21,20 @@ process_mode = 1
 z_as_relative = false
 
 [node name="HUD" parent="." node_paths=PackedStringArray("gameplay") instance=ExtResource("3_5v3ig")]
+visible = false
 z_as_relative = false
 layout_mode = 1
 gameplay = NodePath("../Gameplay")
 
-[node name="PauseMenuTODO" type="Control" parent="."]
+[node name="PauseMenu" parent="." instance=ExtResource("4_s8w8h")]
 visible = false
-z_index = 2000
-z_as_relative = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+
+[node name="EndScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="TitleMenu" parent="." instance=ExtResource("4_pj6m5")]
 z_index = 2000

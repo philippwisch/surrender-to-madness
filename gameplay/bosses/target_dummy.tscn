@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgxb0uexgelr2"]
+[gd_scene load_steps=5 format=3 uid="uid://cgxb0uexgelr2"]
 
 [ext_resource type="PackedScene" uid="uid://dnhs7akej6157" path="res://gameplay/other/boss.tscn" id="1_5d0v5"]
 [ext_resource type="Texture2D" uid="uid://bherw56oi5l2r" path="res://assets/boss_dummy.png" id="2_cdxdr"]
+[ext_resource type="Script" path="res://gameplay/bosses/target_dummy.gd" id="3_w7gcd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bnrdp"]
 animations = [{
@@ -16,3 +17,6 @@ animations = [{
 
 [node name="TargetDummy" instance=ExtResource("1_5d0v5")]
 sprite_frames = SubResource("SpriteFrames_bnrdp")
+script = ExtResource("3_w7gcd")
+hp_max = 100
+hp_regen_value = 1

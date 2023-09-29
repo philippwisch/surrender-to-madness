@@ -1,6 +1,7 @@
 extends Control
 
 signal start_game
+signal quit
 
 var bosses = []
 var boss_vbox
@@ -8,17 +9,11 @@ var main_vbox
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimationPlayer.play("burning")
 	Music.load_and_play("res://assets/menu_main.mp3", 1.5)
 	create_boss_buttons()
 	init_signals()
 	
 	$OptionsPanel/Main/StartButton.grab_focus()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 
 func create_boss_buttons():
@@ -64,19 +59,23 @@ func _on_start_button_pressed():
 	$OptionsPanel/Bosses.get_children()[0].grab_focus()
 
 
-func _on_quit_button_pressed():
-	get_tree().quit()
+func _on_quit_game_button_pressed():
+	quit.emit()
 
 
 func _on_back_button_pressed():
+	_refocus()
+
+
+func _refocus():
 	$OptionsPanel/Main.visible = true
 	$OptionsPanel/Bosses.visible = false
 	$OptionsPanel/Main/StartButton.grab_focus()
 
-
 func init_signals():
 	$OptionsPanel/Main/StartButton.pressed.connect(_on_start_button_pressed)
-	$OptionsPanel/Main/QuitButton.pressed.connect(_on_quit_button_pressed)
+	$OptionsPanel/Main/QuitGameButton.pressed.connect(_on_quit_game_button_pressed)
+	visibility_changed.connect(_refocus)
 	
 	var boss_buttons = $OptionsPanel/Bosses.get_children()
 	for button in boss_buttons:
