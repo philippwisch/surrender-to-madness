@@ -5,4 +5,4 @@
 [node name="Column" type="Sprite2D"]
 z_index = 20
 texture = ExtResource("1_eqmjg")
-offset = Vector2(1.66675, 137.833)
+offset = Vector2(0, 150)

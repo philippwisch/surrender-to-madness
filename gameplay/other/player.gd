@@ -17,6 +17,7 @@ var game_running = false
 func _ready():
 	super._ready()
 	init_signals()
+	$AnimationPlayer.play("idle")
 
 
 func _process(_delta):
@@ -30,7 +31,6 @@ func _process(_delta):
 		super._process(_delta)
 		move()
 		cast()
-	
 		if hp == 0 or rp == 0:
 			death.emit()
 

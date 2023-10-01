@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://vc5bk718hphl"]
+
+[ext_resource type="Texture2D" uid="uid://v4f8m1uixrpi" path="res://assets/player_cast_end.png" id="1_esv8n"]
+[ext_resource type="Texture2D" uid="uid://cqhayeidjp7yl" path="res://assets/player_idle.png" id="2_ok8xn"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("1_esv8n")
+}],
+"loop": false,
+"name": &"cast_end",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ok8xn")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}]
