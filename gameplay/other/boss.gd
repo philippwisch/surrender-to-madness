@@ -18,6 +18,9 @@ func _process(_delta):
 	if game_running:
 		super._process(_delta)
 		cast()
+		
+		if hp == 0:
+			death.emit()
 	
 	
 func start_game():

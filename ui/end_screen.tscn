@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0fbuv")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="C" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,11 +22,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="CenterContainer"]
+[node name="P" type="Panel" parent="C"]
 custom_minimum_size = Vector2(400, 300)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/Panel"]
+[node name="ColorRect" type="ColorRect" parent="C/P"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,23 +35,23 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="CenterContainer/Panel"]
+[node name="Label" type="Label" parent="C/P"]
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 152.0
-text = "VICTORY"
+text = "TITLE"
 label_settings = SubResource("LabelSettings_sqip0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="CenterContainer/Panel"]
+[node name="P" type="Panel" parent="C/P"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 100.0
 offset_right = 390.0
 offset_bottom = 300.0
 
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/Panel/Panel"]
+[node name="ColorRect" type="ColorRect" parent="C/P/P"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,7 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/Panel"]
+[node name="VB" type="VBoxContainer" parent="C/P/P"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -71,14 +71,15 @@ offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QuitToTitleButton" type="Button" parent="CenterContainer/Panel/Panel/VBoxContainer"]
-layout_mode = 2
-text = "QUIT TO TITLE"
-
-[node name="RedoCurrentEncounterButton" type="Button" parent="CenterContainer/Panel/Panel/VBoxContainer"]
+[node name="RedoCurrentEncounterButton" type="Button" parent="C/P/P/VB"]
 layout_mode = 2
 text = "REDO CURRENT ENCOUNTER"
 
-[node name="RandomEncounterButton" type="Button" parent="CenterContainer/Panel/Panel/VBoxContainer"]
+[node name="QuitToTitleButton" type="Button" parent="C/P/P/VB"]
+layout_mode = 2
+text = "QUIT TO TITLE"
+
+[node name="RandomEncounterButton" type="Button" parent="C/P/P/VB"]
+visible = false
 layout_mode = 2
 text = "RANDOM ENCOUNTER"

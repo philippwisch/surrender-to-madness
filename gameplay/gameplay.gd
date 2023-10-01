@@ -15,7 +15,8 @@ signal boss_cast_finished
 signal boss_hp_update
 signal boss_cast_update
 
-signal game_over
+signal game_victory
+signal game_defeat
 
 var player: Player
 var boss: Boss
@@ -110,7 +111,7 @@ func _on_boss_cast_update(cast_progress, cast_name):
 
 
 func _on_boss_death():
-	game_over.emit()
+	game_victory.emit()
 
 
 func _on_boss_hp_update(hp):
@@ -135,7 +136,7 @@ func _on_player_cd_update(progress):
 
 
 func _on_player_death():
-	game_over.emit()
+	game_defeat.emit()
 
 
 func _on_player_hp_update(hp):

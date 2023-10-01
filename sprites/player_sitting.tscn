@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0hg1jbaivjb6"]
 
-[ext_resource type="Texture2D" uid="uid://bt2k6sovxrwri" path="res://assets/sit.png" id="1_r7qnr"]
+[ext_resource type="Texture2D" uid="uid://cnj31ugqhkdii" path="res://assets/player_sit.png" id="1_65j5y"]
 [ext_resource type="Script" path="res://sprites/player_sitting.gd" id="2_wnsoq"]
 
 [node name="Sit" type="Sprite2D"]
 modulate = Color(0.301961, 0.0784314, 0.435294, 1)
 position = Vector2(1136, 569)
-texture = ExtResource("1_r7qnr")
+texture = ExtResource("1_65j5y")
 script = ExtResource("2_wnsoq")
 
 [node name="Timer" type="Timer" parent="."]

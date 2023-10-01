@@ -20,13 +20,19 @@ func _ready():
 
 
 func _process(_delta):
+	# change Player Sprite Color based on how high ressource power is
+	var r = 77 + (255 - 77) * (100 - rp) / 100
+	var g = 20 + (255 - 20) * (100 - rp) / 100
+	var b = 111 + (255 - 111) * (100 - rp) / 100
+	modulate = Color8(r,g,b)
+	
 	if game_running:
 		super._process(_delta)
 		move()
 		cast()
 	
-	if hp == 0 or rp == 0:
-		death.emit()
+		if hp == 0 or rp == 0:
+			death.emit()
 
 
 func emit_all():
@@ -107,13 +113,10 @@ func cast():
 			update_hp(cur_spell.hp_gain)
 			cur_spell.cast.start()
 			cur_spell.cd.start()
+			play("cast_end")
 	
 	update_cast()
 	update_cds()
-
-
-# move this to boss arena and call it from encounter
-
 
 
 func get_move_direction():
@@ -126,7 +129,7 @@ func get_move_direction():
 		dir.y -= 1
 	if Input.is_action_pressed("ui_up"):
 		dir.y += 1
-	return dir			
+	return dir
 
 
 func _on_speed_increase_timeout():
@@ -144,3 +147,6 @@ func _on_resource_drain_timeout():
 func init_signals():
 		$SpeedIncrease.timeout.connect(_on_speed_increase_timeout)
 		$ResourceDrain.timeout.connect(_on_resource_drain_timeout)
+		animation_finished.connect(func():
+			play("idle")
+			)

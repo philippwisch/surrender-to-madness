@@ -5,6 +5,8 @@ signal continue_game
 signal restart_game
 signal quit_to_title
 
+var buttons: Node
+
 func _ready():
 	init_signals()
 
