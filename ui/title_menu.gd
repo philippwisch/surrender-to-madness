@@ -27,7 +27,7 @@ func create_boss_buttons():
 				start_game.emit(boss_name)
 		)
 		$OptionsPanel/Bosses.add_child(button)
-		$OptionsPanel/Bosses.move_child(button, 0)
+	$OptionsPanel/Bosses.move_child($OptionsPanel/Bosses/BackButton, $OptionsPanel/Bosses.get_child_count() - 1)
 
 
 func load_boss_names():

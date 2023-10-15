@@ -81,7 +81,7 @@ func prepare_game(boss_name):
 	player.emit_all()
 	boss.emit_all()
 	
-	boss.global_position = Vector2(800, 400)
+	boss.global_position = arena.BOSS_POSITION
 	player_game_position = Vector2(1,1)
 	# run move once to move player to starting position
 	player.move()

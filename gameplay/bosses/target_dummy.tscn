@@ -18,5 +18,5 @@ animations = [{
 [node name="TargetDummy" instance=ExtResource("1_5d0v5")]
 sprite_frames = SubResource("SpriteFrames_bnrdp")
 script = ExtResource("3_w7gcd")
-hp_max = 100
+hp_max = 999999999999999
 hp_regen_value = 1

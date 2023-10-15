@@ -28,13 +28,15 @@ var position_y_to_scale_factor_position_markers = {
 	2: 2
 }
 
-const GAME_POSITION_MIN = Vector2(1,1)
-const GAME_POSITION_MAX = Vector2(2,2)
+var GAME_POSITION_MIN = Vector2(1,1)
+var GAME_POSITION_MAX = Vector2(2,2)
+
+var BOSS_POSITION
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	BOSS_POSITION = get_viewport_rect().size / 2
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
