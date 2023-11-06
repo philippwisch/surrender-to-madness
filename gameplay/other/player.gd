@@ -11,7 +11,6 @@ signal move_input
 
 var	rp_drain = rp_drain_initial
 var last_input: String						# used to buffer user inputs
-
 var game_running = false
 
 func _ready():

@@ -22,7 +22,6 @@ process_mode = 1
 z_as_relative = false
 
 [node name="HUD" parent="." node_paths=PackedStringArray("gameplay") instance=ExtResource("3_5v3ig")]
-visible = false
 z_as_relative = false
 layout_mode = 1
 gameplay = NodePath("../Gameplay")

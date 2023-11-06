@@ -233,6 +233,14 @@ text = "SM"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="Cast/CDSmall1"]
+offset_top = -30.0
+offset_right = 41.0
+offset_bottom = 10.0
+text = "Q/LB"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CDSmall2" type="ProgressBar" parent="Cast"]
 layout_mode = 1
 anchors_preset = -1
@@ -250,6 +258,14 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Cast/CDSmall2"]
+offset_top = -30.0
+offset_right = 41.0
+offset_bottom = 10.0
+text = "R/RB"
 horizontal_alignment = 1
 vertical_alignment = 1
 
